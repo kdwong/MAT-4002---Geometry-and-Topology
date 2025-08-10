@@ -1,0 +1,112 @@
+\documentclass[11pt,openany]{book}
+
+% Encoding and fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, mathtools, bm}
+
+% Layout and spacing
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{setspace}
+\onehalfspacing
+
+% Theorem environments with cleveref support
+\usepackage{aliascnt}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\providecommand*{\lemmaautorefname}{Lemma}
+
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\providecommand*{\propositionautorefname}{Proposition}
+
+
+\newaliascnt{exercise}{theorem}
+\newtheorem{exercise}[exercise]{Exercise}
+\aliascntresetthe{exercise}
+\providecommand*{\propositionautorefname}{Exercise}
+
+
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\providecommand*{\corollaryautorefname}{Corollary}
+
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+\providecommand*{\definitionautorefname}{Definition}
+
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\providecommand*{\exampleautorefname}{Example}
+
+\theoremstyle{remark}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\providecommand*{\remarkautorefname}{Remark}
+
+% Enumeration
+\usepackage{enumitem}
+\setlist{topsep=4pt,itemsep=2pt,parsep=2pt}
+
+% Graphics and diagrams
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+
+% Header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{}
+
+% Colors and hyperlinks
+\usepackage{xcolor}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=darkblue,
+  citecolor=darkblue,
+  urlcolor=darkblue,
+  pdfborder={0 0 0}
+}
+
+% Title
+\title{MAT 4002 - Geometry and Topology}
+\date{}
+\begin{document}
+\maketitle
+\input{frontmatter/Foreword}
+\tableofcontents
+
+% Include chapters
+
+\input{frontmatter/Notations}
+\input{weeks/wk1}
+\input{weeks/wk2}
+\input{weeks/wk3}
+\input{weeks/wk4}
+\input{weeks/wk5}
+\input{weeks/wk6}
+\input{weeks/wk7}
+\input{weeks/wk8}
+\input{weeks/wk9}
+
+
+
+\end{document}
