@@ -1,524 +1,786 @@
 \chapter{Properties of Topological Spaces}
 
-\section*{3.6.2.1. Hausdorff Property}
+\section{Hausdorff Property}
 
-Definition 3.7 [First Separation Axiom] A topological space \(X\) satisfies the first separation axiom if for any two distinct points \(x \neq  y \in  X\) , there exists open \(U \ni  x\) but not including \(y\) .
-
-Proposition 3.11 A topological space \(X\) has first separation property if and only if for \(\forall x \in  X,\{ x\}\) is closed in \(X\) .
-
-Proof. Sufficiency. Suppose that \(x \neq  y\) , then construct \(U \mathrel{\text{ := }} X \smallsetminus  \{ y\}\) , which is a open set that contains \(x\) but not includes \(y\) .
-
-Necessity. Take any \(x \in  X\) , then for \(\forall y \neq  x\) , there exists \(y \in  {U}_{y}\) that is open and \(x \notin  {U}_{y}\) . Thus
-
+\begin{definition}[First Separation Axiom, $T_1$]
+A topological space \(X\) is said to satisfy the \emph{first separation axiom} (or to be a \emph{\(T_1\) space}) if for every pair of distinct points \(x,y \in X\), there exists an open set \(U \subseteq X\) such that
 \[
-\{ y\}  \subseteq  {U}_{y} \subseteq  X \smallsetminus  \{ x\}
+x \in U \quad \text{and} \quad y \notin U.
+\]
+\end{definition}
+
+\begin{proposition}
+A topological space \(X\) satisfies the first separation axiom (\(T_1\)) if and only if every singleton set \(\{x\}\) is closed in \(X\).
+\end{proposition}
+
+\begin{proof}
+\emph{(\(\Rightarrow\))} Assume \(X\) has the first separation property. Fix \(x \in X\). For each \(y \in X \smallsetminus \{x\}\), there exists an open set \(U_y\) with \(y \in U_y\) and \(x \notin U_y\). Then
+\[
+X \smallsetminus \{x\}
+= \bigcup_{y \neq x} \{y\}
+\subseteq \bigcup_{y \neq x} U_y
+\subseteq X \smallsetminus \{x\}.
+\]
+Hence \(X \smallsetminus \{x\} = \bigcup_{y \neq x} U_y\) is open, so \(\{x\}\) is closed.
+
+\emph{(\(\Leftarrow\))} Suppose every singleton is closed. Given \(x \neq y\), the set
+\[
+U := X \smallsetminus \{y\}
+\]
+is open, contains \(x\), and does not contain \(y\). Thus \(X\) has the first separation property.
+\end{proof}
+
+\begin{definition}[Hausdorff Space]
+\label{def:Hausdorff}
+A topological space \(X\) is called \emph{Hausdorff} (or said to satisfy the second separation axiom, \(T_2\)) if for every pair of distinct points \(x,y \in X\) there exist open neighborhoods \(U\) of \(x\) and \(V\) of \(y\) such that
+\[
+U \cap V = \varnothing.
+\]
+\end{definition}
+\begin{example}
+Every metrizable topological space is Hausdorff.  
+Indeed, let \((X,d)\) be a metric space and take two distinct points \(x,y \in X\).  
+Since \(d(x,y) = r > 0\), consider the open balls
+\[
+U := B_{r/2}(x), \qquad V := B_{r/2}(y).
+\]
+Then \(U\) and \(V\) are disjoint open neighborhoods of \(x\) and \(y\), respectively.  
+Hence \((X,d)\) is Hausdorff.
+\end{example}
+Note that a topological space that is first separable may not necessarily be second separable:
+\begin{example}
+Consider \({\mathcal{T}}_{\text{ co-finite }}\), then \(X\) is first separable but not Hausdorff if \(X\) is infinite: Suppose on the contrary that for given \(x \neq  y\), there exists open sets \(U,V\) such that \(x \in  U,y \in  V\), and
+\[
+U \cap  V = \varnothing  \Rightarrow  X = X \smallsetminus  \left( {U \cap  V}\right)  = \left( {X \smallsetminus  U}\right)  \cup  \left( {X \smallsetminus  V}\right),
+\]
+implying that the union of two finite sets equals \(X\) which is infinite, so we have a contradiction.
+\end{example}
+
+We now explore some nice properties of a Hausdorff topological space:
+\begin{proposition} If the topological space $(X, \mathcal{T})$ is Hausdorff, then all sequences \(\left\{  {x}_{n}\right\}\) in \(X\) has at most one limit.
+\end{proposition}
+\begin{proof} Suppose on the contrary that
+\[
+\left\{  {x}_{n}\right\}   \rightarrow  a,\;\left\{  {x}_{n}\right\}   \rightarrow  b\text{, with }a \neq  b
+\]
+By Hausdorff-ness, there exists \(U,V \in  \mathcal{T}\) and \(U \cap  V = \varnothing\) such that \(U \ni  a\) and \(V \ni  b\).
+
+By tie openness of \(U\), there exists \(N\) such that \(\left\{  {{x}_{N},{x}_{N + 1},\ldots }\right\}   \subseteq  U\), since \(\left\{  {x}_{n}\right\}   \rightarrow  a \in  U\). Similarly, there exists \(M\) such that \(\left\{  {{x}_{M},{x}_{M + 1},\ldots }\right\}   \subseteq  V\). Let \(K = \max \{ M,N\}  + 1\), then \(\varnothing  \neq  U \cap  V \ni  {x}_{K}\), which is a contradiction.
+\end{proof}
+
+\begin{proposition} \label{prop:product_Hausdorff}
+Let \(X\) and \(Y\) be Hausdorff spaces. Then the product space \(X \times Y\), equipped with the product topology, is Hausdorff.
+\end{proposition}
+
+\begin{proof}
+Suppose \((x_{1},y_{1}) \neq (x_{2},y_{2})\) in \(X \times Y\). Then either \(x_{1} \neq x_{2}\) or \(y_{1} \neq y_{2}\).
+
+Without loss of generality, assume \(x_{1} \neq x_{2}\). Since \(X\) is Hausdorff, there exist disjoint open sets \(U,V \subseteq X\) such that \(x_{1} \in U\) and \(x_{2} \in V\). Then
+\[
+(x_{1},y_{1}) \in U \times Y, 
+\quad (x_{2},y_{2}) \in V \times Y,
+\quad (U \times Y) \cap (V \times Y) = \varnothing.
 \]
 
-which implies
-
-\[
-\mathop{\bigcup }\limits_{{y \in  X \smallsetminus  \{ x\} }}\{ y\}  \subseteq  \mathop{\bigcup }\limits_{{y \in  X \smallsetminus  \{ x\} }}{U}_{y} \subseteq  X \smallsetminus  \{ x\}
-\]
-
-i.e., \(X \smallsetminus  \{ x\}  = \mathop{\bigcup }\limits_{{y \in  X\smallsetminus \{ x\} }}{U}_{y}\) is open in \(X\) , i.e., \(\{ x\}\) is closed in \(X\) .
-
-Definition 3.8 [Second separation Axiom] A topological space satisfies the second separation axiom (or \(X\) is Hausdorff) if for all \(x \neq  y\) in \(X\) , there exists open sets \(U,V\) such that
-
-\[
-x \in  U,\;y \in  V,\;U \cap  V = \varnothing
-\]
-
-\begin{itemize}
-\item Example 3.13 All metrizable topological spaces are Hausdorff.
-\end{itemize}
-
-Suppose \(d\left( {x,y}\right)  = r > 0\) , then take \({B}_{r/2}\left( x\right)\) and \({B}_{r/2}\left( y\right)\)
-
-\begin{itemize}
-\item Example 3.14 Note that a topological space that is first separable may not necessarily be second separable:
-\end{itemize}
-
-Consider \({\mathcal{T}}_{\text{ co-finite }}\) , then \(X\) is first separable but not Hausdorff:
-
-Suppose on the contrary that for given \(x \neq  y\) , there exists open sets \(U,V\) such that \(x \in  U,y \in  V\) , and
-
-\[
-U \cap  V = \varnothing  \Rightarrow  X = X \smallsetminus  \left( {U \cap  V}\right)  = \left( {X \smallsetminus  U}\right)  \cup  \left( {X \smallsetminus  V}\right) ,
-\]
-
-implying that the union of two finite sets equals \(X\) , which is infinite, which is a contradiction.
-
-\section*{4.3. Monday for MAT4002}
-
-There will be a quiz next Monday. The scope is everything before CNY holiday. There will be one question with four parts for 40 minutes.
-
-\section*{4.3.1. Hausdorffness}
-
-Reviewing. A topological space(X, T)is said to be Hausdorff (or satisfy the second separtion property), if given any distinct points \(x,y \in  X\) , there exist disjoint open sets \(U,V\) such that \(U \ni  x\) and \(V \ni  y\) .
-
-Proposition 4.5 If the topological space(X, T)is Hausdorff, then all sequences \(\left\{  {x}_{n}\right\}\) in \(X\) has at most one limit.
-
-Proof. Suppose on the contrary that
-
-\[
-\left\{  {x}_{n}\right\}   \rightarrow  a,\;\left\{  {x}_{n}\right\}   \rightarrow  b\text{ , with }a \neq  b
-\]
-
-By separation property, there exists \(U,V \in  \mathcal{T}\) and \(U \cap  V = \varnothing\) such that \(U \ni  a\) and \(V \ni  b\) .
-
-By tie openness of \(U\) , there exists \(N\) such that \(\left\{  {{x}_{N},{x}_{N + 1},\ldots }\right\}   \subseteq  U\) , since \(\left\{  {x}_{n}\right\}   \rightarrow  a \in  U\) . Similarly, there exists \(M\) such that \(\left\{  {{x}_{M},{x}_{M + 1},\ldots }\right\}   \subseteq  V\) . Take \(K = \max \{ M,N\}  + 1\) , then \(\varnothing  \neq  U \cap  V \ni  {x}_{K}\) , which is a contradiction.
-
-Proposition 4.6 Let \(X,Y\) be Hausdorff spaces. Then \(X \times  Y\) is Hausdorff with product topology.
-
-Proof. Suppose that \(\left( {{x}_{1},{y}_{1}}\right)  \neq  \left( {{x}_{2},{y}_{2}}\right)\) in \(X \times  Y\) . Then \({x}_{1} \neq  {x}_{2}\) or \({y}_{1} \neq  {y}_{2}\) . w.l.o.g., assume that \({x}_{1} \neq  {x}_{2}\) , then there exists \(U,V\) open in \(X\) such that \({x}_{1} \in  U,{x}_{2} \in  V\) with \(U \cap  V = \varnothing\) .
-
-Therefore, we imply \(\left( {U \times  Y}\right) ,\left( {V \times  Y}\right)  \in  {\mathcal{T}}_{X \times  Y}\) , and
-
-\[
-\left( {U \times  Y}\right)  \cap  \left( {V \times  Y}\right)  = \left( {U \cap  V}\right)  \cap  Y = \varnothing
-\]
-
-with \(\left( {{x}_{1},{y}_{1}}\right)  \in  U \times  Y,\left( {{x}_{2},{y}_{2}}\right)  \in  V \times  Y\) , i.e., \(X \times  Y\) is Hausdorff with product topology.
+Thus \((x_{1},y_{1})\) and \((x_{2},y_{2})\) have disjoint open neighborhoods. Therefore, \(X \times Y\) is Hausdorff.
+\end{proof}
 
 The same argument applies if the second separation property is replaced by first separation property.
 
-Proposition 4.7 If \(f : X \rightarrow  Y\) is an injective continuous mapping, then \(Y\) is Hausdorff implies \(X\) is Hausdorff.
-
-Proof. Suppose that \(Y\) satisfies the second separation property. For given \(a \neq  b\) in \(X\) , we imply \(f\left( a\right)  \neq  f\left( b\right)\) in \(Y\) . Therefore, there exists \(U \ni  f\left( a\right) ,V \ni  f\left( b\right)\) with \(U \cap  V = \varnothing\) . It follows that
-
+\begin{definition}[Topological embedding] \label{def:embedding}
+A continuous injective map \(f : X \to Y\) between topological spaces is called a \emph{topological embedding} if 
 \[
-a \in  {f}^{-1}\left( U\right) ,b \in  {f}^{-1}\left( V\right) ,\;{f}^{-1}\left( U\right)  \cap  {f}^{-1}\left( V\right)  = {f}^{-1}\left( {U \cap  V}\right)  = \varnothing ,
+f : X \;\longrightarrow\; f(X)
 \]
+is a homeomorphism onto its image, where \(f(X)\) is equipped with the subspace topology from \(Y\).
+\end{definition}
 
-i.e., \(X\) is Hausdorff.
-
-Corollary 4.1 If \(f : X \rightarrow  Y\) is homeomorphic, then \(X\) is Hausdorff iff \(Y\) is Hausdorff, i.e., Hausdorffness is a topological property (i.e., a property that is preserved under homeomorphism).
-
-\section*{4.3.2. Connectedness}
-
-Definition 4.4 [Connected] The topological space(X, T)is disconnected if there are open \(U,V \in  \mathcal{T}\) such that
-
+\begin{remark}
+Equivalently, \(f\) is an embedding if it is continuous, injective, and for every open set \(U \subseteq X\), there exists an open set \(V \subseteq Y\) such that 
 \[
-U \neq  \varnothing ,V \neq  \varnothing ,\;U \cap  V = \varnothing ,\;U \cup  V = X. \tag{4.4}
+U = f^{-1}(V) \cap X.
 \]
+\end{remark}
 
-If no such \(U,V \in  \mathcal{T}\) exist, then \(X\) is connected.
+\begin{proposition} \label{prop:embedding_Hausdorff}
+Let \(f : X \to Y\) be a topological embedding. If \(Y\) is Hausdorff, then \(X\) is Hausdorff.
+\end{proposition}
 
-Proposition 4.8 Let(X, T)be topological spaces. TFAE (i.e., the followings are equivalent):
+\begin{proof}
+Since \(f\) is an embedding, \(f : X \to f(X)\) is a homeomorphism onto its image, where \(f(X)\) is given the subspace topology from \(Y\).  
 
-1. \(X\) is connected
-
-2. The only subset of \(X\) which are both open and closed are \(\varnothing\) and \(X\)
-
-3. Any continuous function \(f : X \rightarrow  \{ 0,1\}\) ( \(\{ 0,1\}\) is equipped with discrete topology) is a constant function.
-
-Proof. (1) implies (2): Suppose that \(U \subseteq  X\) is both open and closed. Then \(U,X \smallsetminus  U\) are both open and disjoint, and \(U \cup  \left( {X \smallsetminus  U}\right)  = X\) . By connnectedness, either \(U = \varnothing\) or \(X \smallsetminus  U = \varnothing\) . Therefore, \(U = \varnothing\) or \(X\) .
-
-(2) implies (3): Note that \(U = {f}^{-1}\left( {\{ 0\} }\right)\) and \(V = {f}^{-1}\left( {\{ 1\} }\right)\) are open disjoint sets in \(X\) satisfying \(U \cup  V = X\) . By the connectedness of \(X\) , either \(\left( {U,V}\right)  = \left( {X,\varnothing }\right)\) or \(\left( {V,U}\right)  = \left( {\varnothing ,X}\right)\) . In either case, we imply \(f\) is a constant function.
-
-(3) implies (2): Suppose that \(U \subseteq  X\) is both open and closed. Construct the mapping
-
+Take distinct points \(a,b \in X\). Then \(f(a) \neq f(b)\) in \(Y\). As \(Y\) is Hausdorff, there exist disjoint open sets \(U,V \subseteq Y\) with 
 \[
-f\left( x\right)  = \left\{  \begin{array}{ll} 0, & x \in  U \\  1, & x \in  X \smallsetminus  U \end{array}\right.
+f(a) \in U, \qquad f(b) \in V, \qquad U \cap V = \varnothing.
 \]
+It follows that \(U \cap f(X)\) and \(V \cap f(X)\) are disjoint open neighborhoods of \(f(a)\) and \(f(b)\) in \(f(X)\).  
 
-It’s clear that \(f\) is continuous, and therefore \(f\left( x\right)  = 0\) or 1 . Therefore \(U = \varnothing\) or \(X\) .
+By the homeomorphism \(f : X \to f(X)\), the preimages \(f^{-1}(U \cap f(X))\) and \(f^{-1}(V \cap f(X))\) are disjoint open neighborhoods of \(a\) and \(b\) in \(X\). Thus \(X\) is Hausdorff.
+\end{proof}
 
-(2) implies (1): Suppose on the contrary that there exists open \(U,V\) such that (4.4) holds. By (4.4), we imply \(U = X \smallsetminus  V\) is closed as well. Since \(U \neq  \varnothing\) and \(U = \varnothing\) or \(X\) , we imply \(U = X\) , which implies \(V = \varnothing\) , which is a contradiction.
+\begin{remark}
+If one only assumes that \(f\) is continuous and injective, the conclusion may fail.  
+For example, let \(X\) be any non-Hausdorff space and let \(f : X \to \{*\}\) be the constant injective map into a one-point Hausdorff space. Then \(f\) is continuous and injective, but \(X\) is not Hausdorff. The embedding condition ensures that the topology of \(X\) is faithfully represented inside \(Y\).
+\end{remark}
 
-\section*{Corollary 4.2 The interval \(\left\lbrack  {a,b}\right\rbrack   \subseteq  \mathbb{R}\) is connnected}
+\begin{corollary} \label{cor:Hausdorff_invariant}
+If \(f : X \to Y\) is a homeomorphism, then \(X\) is Hausdorff if and only if \(Y\) is Hausdorff.  
+In particular, Hausdorff-ness is a \emph{topological property}, i.e., a property preserved under homeomorphism.
+\end{corollary}
 
-Proof. Suppose on the contrary that there exists continuous function \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \{ 0,1\}\) that takes 2 values. Construct the mapping \(\widetilde{f} : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbb{R}\)
+\section{Connectedness}
+
+\begin{definition}[Connected space] \label{def:connected}
+A topological space \((X, \mathcal{T})\) is said to be \emph{disconnected} if there exist non-empty open sets \(U,V \in \mathcal{T}\) such that
+\[
+U \cap V = \varnothing, \qquad U \cup V = X.
+\]
+If no such pair exists, then \(X\) is called \emph{connected}.
+\end{definition}
+
+\begin{proposition} \label{prop:connected_equiv}
+For a topological space \((X, \mathcal{T})\), the following are equivalent:
+\begin{enumerate}
+    \item \(X\) is connected.
+    \item The only subsets of \(X\) which are both open and closed are \(\varnothing\) and \(X\).
+    \item Every continuous function \(f : X \to \{0,1\}\) (where \(\{0,1\}\) is equipped with the discrete topology) is constant.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\noindent (1) $\Rightarrow$ (2):  
+Suppose \(U \subseteq X\) is both open and closed. Then \(U\) and \(X \setminus U\) are disjoint open sets with 
+\[
+U \cup (X \setminus U) = X.
+\]
+By connectedness, either \(U = \varnothing\) or \(X \setminus U = \varnothing\). Hence \(U = \varnothing\) or \(U = X\).
+
+\medskip
+
+\noindent (2) $\Rightarrow$ (3):  
+Let \(f : X \to \{0,1\}\) be continuous. Define
+\[
+U = f^{-1}(\{0\}), \qquad V = f^{-1}(\{1\}).
+\]
+Then \(U,V\) are open, disjoint, and \(U \cup V = X\). By (2), either \((U,V) = (X,\varnothing)\) or \((U,V) = (\varnothing,X)\). Thus \(f\) is constant.
+
+\medskip
+
+\noindent (3) $\Rightarrow$ (2):  
+Suppose \(U \subseteq X\) is both open and closed. Define
+\[
+f(x) =
+\begin{cases}
+0, & x \in U, \\
+1, & x \in X \setminus U.
+\end{cases}
+\]
+This map \(f : X \to \{0,1\}\) is continuous. By (3), \(f\) is constant, hence \(U = \varnothing\) or \(U = X\).
+
+\medskip
+
+\noindent (2) $\Rightarrow$ (1):  
+Suppose, for contradiction, that \(X\) is disconnected. Then there exist non-empty disjoint open sets \(U,V \subseteq X\) with \(U \cup V = X\). In this case, \(U = X \setminus V\) is both open and closed, contradicting (2). Hence \(X\) must be connected.
+\end{proof}
+
+\begin{corollary}
+    The interval \(\left\lbrack  {a,b}\right\rbrack   \subseteq  \mathbb{R}\) is connnected
+\end{corollary}
+
+\begin{proof}
+    Suppose on the contrary that there exists continuous function \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \{ 0,1\}\) that takes 2 values. Construct the mapping \(\widetilde{f} : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbb{R}\)
 
 \[
 \widetilde{f} : \left\lbrack  {a,b}\right\rbrack  \overset{f}{ \rightarrow  }\{ 0,1\} \overset{i}{ \rightarrow  }\mathbb{R}
 \]
 
 \[
-\text{ with }\widetilde{f} = i \circ  f\text{ . }
+\text{ with }\widetilde{f} = i \circ  f\text{. }
 \]
 
 Note that \(\{ 0,1\}  \subseteq  \mathbb{R}\) denotes the subspace topology, we imply the inclusion mapping \(i : \{ 0,1\}  \rightarrow  \mathbb{R}\) with \(s \mapsto  s\) is continuous. The composition of continuous mappings is continuous as well, i.e., \(\widetilde{f}\) is continuous.
 
-Since the function \(f\) can take two values, there exists \(p,q \in  \left\lbrack  {a,b}\right\rbrack\) such that \(\widetilde{f}\left( p\right)  =\)  \(i \circ  f\left( p\right)  = 0\) and \(\widetilde{f}\left( q\right)  = i \circ  f\left( q\right)  = 1\) . By intermediate value theorem, there exists \(r \in  \left\lbrack  {a,b}\right\rbrack\) such that \(\widetilde{f}\left( r\right)  = i \circ  f\left( r\right)  = 1/2\) , which implies \(f\left( r\right)  = \frac{1}{2}\) , which is a contradiction.
+Since the function \(f\) can take two values, there exists \(p,q \in  \left\lbrack  {a,b}\right\rbrack\) such that \(\widetilde{f}\left( p\right)  =\)  \(i \circ  f\left( p\right)  = 0\) and \(\widetilde{f}\left( q\right)  = i \circ  f\left( q\right)  = 1\). By intermediate value theorem, there exists \(r \in  \left\lbrack  {a,b}\right\rbrack\) such that \(\widetilde{f}\left( r\right)  = i \circ  f\left( r\right)  = 1/2\), which implies \(f\left( r\right)  = \frac{1}{2}\), which is a contradiction.
+\end{proof} 
 
-Definition 4.5 [Connected subset] A non-empty subset \(S \subseteq  X\) is connected if \(S\) with the subspace topology is connected
+\begin{definition}[Connected subset] \label{def:connected_subset}
+A non-empty subset \(S \subseteq X\) is connected if \((S, \mathcal{T}_S)\), where \(\mathcal{T}_S\) denotes the subspace topology on \(S\), is a connected topological space.
 
-Equivalently, \(S \subseteq  X\) is connected if, whenever \(U,V\) are open in \(X\) such that \(S \subseteq  U \cup  V\) , and \(\left( {U \cap  V}\right)  \cap  S = \varnothing\) , one can imply either \(U \cap  S = \varnothing\) or \(V \cap  S = \varnothing\) .
-
-Proposition 4.9 If \(f : X \rightarrow  Y\) is continuous mapping, and the subset \(A \subseteq  X\) is connected, then \(f\left( A\right)\) is connected. In other words, the continuous image of a connected set is connected.
-
-Proof. Suppose that \(U,V \subseteq  Y\) is open such that
-
+Equivalently, \(S \subseteq X\) is connected if, whenever \(U,V \subseteq X\) are open sets such that
 \[
-f\left( A\right)  \subseteq  U \cup  V,\;\left( {U \cap  V}\right)  \cap  f\left( A\right)  = \varnothing .
+S \subseteq U \cup V, \qquad (U \cap V) \cap S = \varnothing,
+\]
+it follows that either \(U \cap S = \varnothing\) or \(V \cap S = \varnothing\).
+\end{definition}
+
+\begin{proposition} \label{prop:connected_image}
+If \(f : X \to Y\) is continuous and \(A \subseteq X\) is connected, then \(f(A)\) is connected.  
+In other words, the continuous image of a connected set is connected.
+\end{proposition}
+
+\begin{proof}
+Suppose that \(U,V \subseteq Y\) are open sets such that
+\[
+f(A) \subseteq U \cup V, 
+\qquad (U \cap V) \cap f(A) = \varnothing.
+\]
+Then
+\[
+A \subseteq f^{-1}(U) \cup f^{-1}(V), 
+\qquad \bigl(f^{-1}(U) \cap A\bigr) \cap \bigl(f^{-1}(V) \cap A\bigr) = \varnothing.
 \]
 
-Therefore we imply
+By the connectedness of \(A\), either \(f^{-1}(U) \cap A = \varnothing\) or \(f^{-1}(V) \cap A = \varnothing\).  
+Therefore, either \(f(A) \cap U = \varnothing\) or \(f(A) \cap V = \varnothing\).  
+Hence \(f(A)\) is connected.
+\end{proof}
 
+\begin{proposition} \label{prop:union_connected}
+If \(\{A_i\}_{i \in I}\) is a family of connected subsets of \(X\) such that 
 \[
-A \subseteq  {f}^{-1}\left( U\right)  \cup  {f}^{-1}\left( V\right) ,\;\left( {{f}^{-1}\left( U\right)  \cap  A}\right)  \cap  \left( {{f}^{-1}\left( V\right)  \cap  A}\right)  = \varnothing
+A_i \cap A_j \neq \varnothing \quad \text{for all } i,j \in I,
 \]
+then the union \(\bigcup_{i \in I} A_i\) is connected.
+\end{proposition}
 
-By connectedness of \(A\) , either \({f}^{-1}\left( U\right)  \cap  A = \varnothing\) or \({f}^{-1}\left( V\right)  \cap  A = \varnothing\) . Therefore, \(f\left( A\right)  \cap  U = \varnothing\) or \(f\left( A\right)  \cap  V = \varnothing\) , i.e., \(f\left( A\right)\) is connected.
+\begin{proof}
+Suppose the function \(f : \bigcup\limits_{i \in I} A_i \;\longrightarrow\; \{0,1\}\) is a continuous map. Then we imply that its restriction \({\left. f\right| }_{{A}_{i}} = f \circ  i : {A}_{i} \rightarrow  \{ 0,1\}\) is continuous for all \(i \in  I\). Thus \({\left. f\right| }_{{A}_{i}}\) is a constant for all \(i \in  I\). Due to the non-empty intersection of \({A}_{i},{A}_{j}\) for \(\forall i,j \in  I\), we imply \(f\) is constant. By \autoref{prop:connected_equiv},  \(\bigcup\limits_{i \in I} A_i\) is connected.
+\end{proof}
 
-Proposition 4.10 If \({\left\{  {A}_{i}\right\}  }_{i \in  I}\) are connnected and \({A}_{i} \cap  {A}_{j} \neq  \varnothing\) for \(\forall i,j \in  I\) , then the set \(\mathop{\bigcup }\limits_{{i \in  I}}{A}_{i}\) is connected.
+\begin{exercise}
+    Use \autoref{prop:connected_image} to give another proof. \emph{Hint.} Fix \(j \in I\). Construct a continuous map
+\(
+f_j : \bigcup_{i \in I} A_i \;\longrightarrow\; A_j.
+\)
+\end{exercise}
 
-Proof. Suppose the function \(f : { \cup  }_{i \in  I}{A}_{i} \rightarrow  \{ 0,1\}\) is a continuous map. Then we imply that its restriction \({\left. f\right| }_{{A}_{i}} = f \circ  i : {A}_{i} \rightarrow  \{ 0,1\}\) is continuous for all \(i \in  I\) . Thus \({\left. f\right| }_{{A}_{i}}\) is a constant for all \(i \in  I\) . Due to the non-empty intersection of \({A}_{i},{A}_{j}\) for \(\forall i,j \in  I\) , we imply \(f\) is constant.
 
-Proposition 4.11 If \(X,Y\) are connnected, then \(X \times  Y\) is connected using product topology.
+\begin{proposition} \label{prop:product_connected}
+If \(X\) and \(Y\) are connected spaces, then the product space \(X \times Y\), equipped with the product topology, is connected.
+\end{proposition}
 
-Proof. It’s clear that \(X \times  \left\{  {y}_{0}\right\}\) is connected in \(X \times  Y\) for fixed \({y}_{0}\) ; and \(\left\{  {x}_{0}\right\}   \times  Y\) is connected for fixed \({x}_{0}\) .
-
-Therefore, for fixed \({y}_{0} \in  Y\) , construct \(B = X \times  \left\{  {y}_{0}\right\}\) and \({C}_{x} = \{ x\}  \times  Y\) , which follows that
-
+\begin{proof}
+Fix \(y_0 \in Y\). The subset
 \[
-B \cap  {C}_{x} = \left\{  \left( {x,{y}_{0}}\right) \right\}   \neq  \varnothing ,\forall x \in  X \Rightarrow  B \cup  \left\{  {\mathop{\bigcup }\limits_{{x \in  X}}{C}_{x}}\right\}   = X \times  Y\text{ is connected. }
+B := X \times \{ y_0 \} \subseteq X \times Y
 \]
-
-Definition 4.6 [Path Connectes] Let(X, T)be a topological space.
-
-1. A path connecting 2 points \(x,y \in  X\) is a continuous function \(\tau  : \left\lbrack  {0,1}\right\rbrack   \rightarrow  X\) with \(\tau \left( 0\right)  = x,\tau \left( 1\right)  = y\) .
-
-2. \(X\) is path-connected if any 2 points in \(X\) can be connected by a path.
-
-3. The set \(A \subseteq  X\) is path-connected, if \(A\) sastisfies the condition using subspace topology.
-
-Or equivalently, \(A\) is path-connected if for any 2 points in \(X\) , there exists a continuous \(t : \left\lbrack  {0,1}\right\rbrack   \rightarrow  X\) with \(t\left( x\right)  \in  A\) for any \(x\) , connecting the 2 points.
-
-\section*{4.6. Wednesday for MAT4002}
-
-There will be a quiz on Monday.
-
-Reviewing.
-
-\begin{itemize}
-\item Connectedness / Path-Connectedness
-\end{itemize}
-
-\section*{4.6.1. Remark on Connectedness}
-
-Proposition 4.14 All path connected spaces \(X\) are connected.
-
-Proof. Fix any \(x \in  X\) , for all \(y \in  X\) , there exists a continuous mapping \({p}_{y} : \left\lbrack  {0,1}\right\rbrack   \rightarrow  X\) such that
-
+is homeomorphic to \(X\), hence connected.  
+Similarly, for each \(x \in X\), the subset
 \[
-{p}_{y}\left( 0\right)  = x,\;{p}_{y}\left( 1\right)  = y.
+C_x := \{x\} \times Y \subseteq X \times Y
 \]
+is homeomorphic to \(Y\), hence connected.  
 
-Consider \({C}_{y} = {p}_{y}\left( \left\lbrack  {0,1}\right\rbrack  \right)\) , which is connected, due to proposition (4.9).
-
-Note that \({\left\{  {C}_{y}\right\}  }_{y \in  X}\) is a collection of connected sets, and for any \(y,{y}^{\prime } \in  X,{C}_{y} \cap  {C}_{{y}^{\prime }} \ni\)  \(\{ x\}\) is non-empty. Applying proposition (4.10), we imply \(X = { \cup  }_{y \in  X}{C}_{y}\) is connected.
-
-\begin{itemize}
-\item Example 4.5 1. Exercise: if \(A \subset  B \subset  \bar{A}\) , then \(A\) is connected implies \(B\) is connected. (Hint: \(U \cap  A = \varnothing\) implies \(U \cap  \bar{A} = \varnothing\) for all open sets \(U\) in \(X\) .)
-\end{itemize}
-
-Proof. Suppose \(B\) is not connected, i.e., for any open \(U,V\) such that \(B \subseteq  U \cup  V\) and \(\left( {U \cap  V}\right)  \cap  B = \varnothing\) , we imply \(U \cap  B \neq  \varnothing\) and \(V \cap  B \neq  \varnothing\) , and therefore
-
+Moreover, for each \(x \in X\),
 \[
-U \cap  \bar{A} \neq  \varnothing ,\;V \cap  \bar{A} \neq  \varnothing
+B \cap C_x = \{(x,y_0)\} \neq \varnothing.
 \]
-
-which implies
-
+Thus, by \autoref{prop:union_connected}, the union
 \[
-U \cap  A \neq  \varnothing ,\;V \cap  A \neq  \varnothing
+B \cup \bigcup_{x \in X} C_x = X \times Y
 \]
+is connected.
+\end{proof}
 
-which contradicts to the connectedness of \(A\) .
+\begin{definition}[Path-Connectedness]\label{def:path_connectedness}
+Let $(X, \mathcal{T})$ be a topological space.  
 
-2. The converse of proposition (4.14) may not be necessarily true. Consider the so-called Topologist's comb example:
+\begin{enumerate}
+    \item A \emph{path} between two points \(x,y \in X\) is a continuous map 
+    \[
+        \tau : [0,1] \to X, \qquad \tau(0) = x,\; \tau(1) = y.
+    \]
+    
+    \item The space \(X\) is said to be \emph{path-connected} if any two points in \(X\) can be joined by a path.
+    
+    \item A subset \(A \subseteq X\) is \emph{path-connected} if it is path-connected with respect to the subspace topology.  
+    Equivalently, \(A\) is path-connected if for every pair of points \(x,y \in A\), there exists a continuous map 
+    \[
+        \tau : [0,1] \to A, \qquad \tau(0) = x,\; \tau(1) = y.
+    \]
+\end{enumerate}
+\end{definition}
 
-\begin{center}
-\includegraphics[max width=0.5\textwidth]{images/bo_d2bcsrref24c73avs720_52_671_318_639_611_0.jpg}
-\end{center}
-\hspace*{3em} 
+\begin{proposition}\label{prop:path_conn_implies_conn}
+All path-connected spaces are connected.
+\end{proposition}
 
-Figure 4.1: Connected space \(X\) but not path-connected
-
-Here we construct a connected space \(X \subseteq  {\mathbb{R}}^{2}\) but not path-connected shown in Fig (4.1), i.e., the union of the interval \(\left\lbrack  {0,1}\right\rbrack\) together with vertical line segments from \(\left( {1/n,0}\right)\) to \(\left( {1/n,1}\right)\) and the single point(0,1).
-
+\begin{proof}
+Fix \(x \in X\). For each \(y \in X\), by path-connectedness there exists a continuous map 
 \[
-X = \left( {\left\lbrack  {0,1}\right\rbrack  \times \{ 0\} }\right)  \cup  \mathop{\bigcup }\limits_{{n \geq  1}}\left( {\{ 1/n\}  \times  \left\lbrack  {0,1}\right\rbrack  }\right)  \cup  \left( {0,1}\right) .
+p_y : [0,1] \to X, \qquad p_y(0) = x, \; p_y(1) = y.
 \]
-
-(a) Firstly, \(X\) is not path-connected. We show that there is no path in \(X\) links(0,1) to any other point, i.e., for continuous mapping \(p : \left\lbrack  {0,1}\right\rbrack   \rightarrow  X\) with \(p\left( 0\right)  = \left( {0,1}\right)\) , we may imply \(p\left( t\right)  = \left( {0,1}\right)\) for any \(t\) .
-
 Define
-
 \[
-A = \{ t \in  \left\lbrack  {0,1}\right\rbrack   \mid  p\left( t\right)  = \left( {0,1}\right) \} .
+C_y := p_y([0,1]) \subseteq X.
+\]
+By \autoref{prop:connected_image}, each \(C_y\) is connected, since it is the continuous image of the connected set \([0,1]\).  
+
+Moreover, for any \(y,y' \in X\),
+\[
+C_y \cap C_{y'} \supseteq \{x\} \neq \varnothing.
+\]
+Thus the family \(\{C_y\}_{y \in X}\) is a collection of connected sets with non-empty mutual intersection. By \autoref{prop:union_connected}, we conclude that
+\[
+X = \bigcup_{y \in X} C_y
+\]
+is connected.
+\end{proof}
+
+\begin{exercise}
+If \(A \subset B \subset \overline{A}\), then \(A\) connected implies \(B\) connected.  
+(Hint: for every open \(U \subseteq X\), if \(U \cap A = \varnothing\), then also \(U \cap \overline{A} = \varnothing\).)
+\end{exercise}
+
+\begin{example}[Topologist's comb]
+\label{ex:topologist_comb}
+The converse of \autoref{prop:path_conn_implies_conn} is false.  
+Consider the subset \(X \subseteq \mathbb{R}^2\) defined by
+\[
+X \;=\; 
+\bigl( [0,1] \times \{0\} \bigr) 
+\;\cup\; 
+\bigcup_{n \in \mathbb{N}_{\geq 1}} \bigl( \{1/n\} \times [0,1] \bigr) 
+\;\cup\; 
+\{(0,1)\},
+\]
+where we take \(\mathbb{N}_{\geq 1} = \{1,2,3,\dots\}\).
+
+This space, known as the \emph{Topologist's comb}, is connected but not path-connected
+(see \autoref{fig:comb}).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{images/Ch3_topologists_comb.jpg}
+\caption{A connected but not path-connected space \(X\).}
+\label{fig:comb}
+\end{figure}
+
+\begin{enumerate}
+\item[\textbf{(a)}] 
+\(X\) is not path-connected.  
+Suppose there exists a path \(p : [0,1] \to X\) with
+\[
+p(0) = (0,1), \qquad p(1) = (x,y) \in X \setminus \{(0,1)\}.
+\]
+Define
+\[
+A := \{ t \in [0,1] \mid p(t) = (0,1) \}.
+\]
+We will show \(A = [0,1]\), i.e.\ the path must be constant.
+
+\begin{enumerate}
+\item[(i)] \(A\) is closed since it is the preimage of the closed singleton \(\{(0,1)\}\).  
+\item[(ii)] \(A\) is open: fix \(t_0 \in A\). By continuity of \(p\), there exists \(\delta > 0\) such that
+\[
+\|p(t) - (0,1)\| < \tfrac{1}{2},
+\qquad 
+t \in [0,1] \cap (t_0 - \delta, t_0 + \delta).
+\]
+Thus \(p(t)\) cannot lie on the $x$-axis. Its $x$-coordinate must therefore belong to
+\(\{0\} \cup \{1/n : n \geq 1\}\).  
+Let \(I := [0,1] \cap (t_0 - \delta, t_0 + \delta)\). Consider the continuous function
+\[
+f := \pi_x \circ p : I \to \mathbb{R},
+\]
+where \(\pi_x(a,b) = a\) is the $x$-coordinate. Since \(I\) is connected, \(f(I)\) is connected.  
+But \(f(I) \subseteq \{0\} \cup \{1/n : n \geq 1\}\), whose only connected subsets are singletons.  
+Since \(f(t_0) = 0\), we deduce \(f(I) = \{0\}\). Hence \(p(t) = (0,1)\) for all \(t \in I\), i.e.\ \(I \subseteq A\).  
+Thus \(A\) is open.
+\end{enumerate}
+
+Therefore \(A\) is nonempty, closed, and open in the connected interval \([0,1]\), so \(A = [0,1]\).  
+Hence any such path is constant, and no path connects \((0,1)\) to another point of \(X\).
+
+\item[\textbf{(b)}] 
+Nonetheless, \(X\) is connected. (Proof omitted here, but it relies on showing that any separation would disconnect the horizontal interval from the vertical combs, which is impossible.)
+\end{enumerate}
+\end{example}
+
+\section{Compactness}
+
+Compactness generalizes the Euclidean notion of “closed and bounded” subsets of \(\mathbb{R}^n\).
+
+\begin{definition}[Compactness]
+\label{def:compactness}
+Let \((X, \mathcal{T})\) be a topological space.  
+
+\begin{enumerate}
+\item 
+A collection \(\mathcal{U} = \{U_i \mid i \in I\}\) of open sets is called an \emph{open cover} of \(X\) if
+\[
+X \;=\; \bigcup_{i \in I} U_i.
 \]
 
-We claim that \(A = \left\lbrack  {0,1}\right\rbrack\) , i.e., suffices to show \(A\) is both open and closed in \(\left\lbrack  {0,1}\right\rbrack   :\)
-
-i. The set \(A = {p}^{-1}\left( \left( {0,1}\right) \right)\) is nonempty and closed, since the pre-image of a closed set is closed as well.
-
-ii. The set \(A\) is open: choose \({t}_{0} \in  A\) . By continuity of \(p\) , there exists \(\delta  > 0\) such that
-
+\item 
+A \emph{subcover} of \(\mathcal{U}\) is a subfamily
 \[
-\parallel p\left( t\right)  - \left( {0,1}\right) \parallel  = \begin{Vmatrix}{p\left( t\right)  - p\left( {t}_{0}\right) }\end{Vmatrix} < \frac{1}{2},\;t \in  \left\lbrack  {0,1}\right\rbrack   \cap  \left( {{t}_{0} - \delta ,{t}_{0} + \delta }\right) .
+\mathcal{U}' = \{ U_j \mid j \in J \}, \qquad J \subseteq I,
+\]
+such that
+\[
+X \;=\; \bigcup_{j \in J} U_j.
 \]
 
-Since there is no point on the \(x\) -axis with the distance \(1/2\) to the point (0,1), we imply \(p\left( t\right)\) is not on the \(x\) -axis when \(t \in  \left\lbrack  {0,1}\right\rbrack   \cap  \left( {{t}_{0} - \delta ,{t}_{0} + \delta }\right)\) . Therefore, the \(x\) -coordinate of \(p\left( t\right)\) is either 0 or of the form \(1/n\) .
+\item 
+If \(J\) is finite, then \(\mathcal{U}'\) is called a \emph{finite subcover}.
+\end{enumerate}
 
-It suffices to show the open interval \(I \mathrel{\text{ := }} \left\lbrack  {0,1}\right\rbrack   \cap  \left( {{t}_{0} - \delta ,{t}_{0} + \delta }\right)\) is in \(A\) . Define the composite function \(f = x \circ  p : I \rightarrow  \mathbb{R}\) , where the mapping \(x : {\mathbb{R}}^{2} \rightarrow  \mathbb{R}\) is defined as \(\left( {a,b}\right)  \mapsto  a\) . Note that \(I\) is connected, we imply \(f\left( I\right)\) is connected, and \(f\left( I\right)\) belongs to \(\{ 0\}  \cup  \{ 1/n\}\) .
+We say that \(X\) is \emph{compact} if every open cover of \(X\) admits a finite subcover i.e. \(X \;=\; \bigcup\limits_{j = 1}^n U_j.\)
 
-The only nonempty connected subset of \(\{ 0\}  \cup  \{ 1/n\}\) is a single point (left as exercise), and therefore \(f\left( I\right)\) is a single point. Since \(f\left( {t}_{0}\right)  = 0\) , we imply \(f\left( I\right)  = \{ 0\}\) , i.e., \(I \subseteq  A\) . Therefore \(A\) is open.
-
-\section*{4.6.2. Compactness}
-
-Compact set in \(X\) is used to generalize "closed and bounded" in \({\mathbb{R}}^{n}\) .
-
-Definition 4.11 Let(X, T)be a topological space. A collection \(\mathcal{U} = \left\{  {{U}_{i} \mid  i \in  I}\right\}\) of open sets is an open cover of \(X\) if
-
+\medskip
+If \(A \subseteq X\) is equipped with the subspace topology, then \(A\) is compact if and only if,
+for every collection of open sets \(\{U_i\}_{i \in I}\) in \(X\) such that
 \[
-X = \mathop{\bigcup }\limits_{{i \in  I}}{U}_{i}
+A \;\subseteq\; \bigcup_{i \in I} U_i,
+\]
+there exists a finite subcollection
+\[
+A \;\subseteq\; \bigcup_{k=1}^n U_{i_k}.
+\]
+\end{definition}
+
+\begin{proposition}[Finite Intersection Property]
+\label{prop:FIP}
+Let \(X\) be a topological space. The following are equivalent:
+\begin{enumerate}
+\item \(X\) is compact.
+\item If \(\{V_i \mid i \in I\}\) is a collection of closed subsets of \(X\) with the property that
+\[
+\bigcap_{j \in J} V_j \;\neq\; \varnothing, 
+\qquad \text{for all finite } J \subseteq I,
+\]
+then
+\[
+\bigcap_{i \in I} V_i \;\neq\; \varnothing.
+\]
+\end{enumerate}
+\end{proposition}
+
+Compactness is an \emph{intrinsic} property of a space: it depends only on the topology of \(X\), not on how \(X\) may be embedded into some larger space.
+
+\begin{example}
+\leavevmode
+\begin{enumerate}
+\item[\textbf{1.}] 
+If \(X \subseteq \mathbb{R}^n\), then \(X\) is compact if and only if \(X\) is closed and bounded.  
+(This is the classical \href{https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem}{\emph{Heine--Borel theorem}}.)
+
+\item[\textbf{2.}] 
+Let \(K \subseteq \mathbb{R}^n\) be compact, and define
+\[
+\mathcal{C}(K) \;=\; \{\, f : K \to \mathbb{R} \;\mid\; f \text{ continuous} \,\}.
+\]
+Equip \(\mathcal{C}(K)\) with the \(\infty\)-norm
+\[
+\|f\|_\infty \;=\; \sup_{k \in K} |f(k)|.
+\]
+This induces the metric space \(\bigl(\mathcal{C}(K), d_\infty \bigr)\), where
+\[
+d_\infty(f,g) \;=\; \|f-g\|_\infty,
+\]
+which is in fact a \href{https://en.wikipedia.org/wiki/Banach_space}{Banach space} (a complete normed vector space).
+
+A subset \(\mathcal{J} \subseteq \mathcal{C}(K)\) is compact if and only if it is
+\[
+\bigl[\text{closed, bounded, and equicontinuous}\bigr]
+\]
+(where \emph{equicontinuous} means: for every \(\varepsilon > 0\), there exists \(\delta > 0\) such that 
+\(|f(x)-f(y)| < \varepsilon\) for all \(f \in \mathcal{J}\) whenever \(\|x-y\| < \delta\)).  
+(This is the celebrated \href{https://en.wikipedia.org/wiki/Arzel%C3%A0%E2%80%93Ascoli_theorem}{\emph{Arzelà--Ascoli theorem}}.)
+
+\medskip
+This shows that in infinite-dimensional spaces, compactness is no longer the same as closedness plus boundedness.
+\end{enumerate}
+\end{example}
+
+\begin{proposition}
+\label{prop:closed_subsets_compact}
+Let \(X\) be a compact space. Then every closed subset \(A \subseteq X\) is compact.
+\end{proposition}
+
+\begin{proof}
+Let \(\{V_i \mid i \in I\}\) be a collection of closed subsets of \(A\) such that 
+\[
+\bigcap_{j \in J} V_j \;\neq\; \varnothing 
+\quad\text{for all finite } J \subseteq I.
+\]
+Since \(A\) is closed in \(X\), each \(V_i\) can be written as \(V_i = A \cap W_i\) for some closed set \(W_i \subseteq X\).  
+Thus the family \(\{W_i \mid i \in I\}\) has the \hyperref[prop:FIP]{finite intersection property} in \(X\).  
+
+By compactness of \(X\), we deduce
+\[
+\bigcap_{i \in I} W_i \;\neq\; \varnothing.
+\]
+Intersecting with \(A\), we get
+\[
+\bigcap_{i \in I} V_i 
+= A \cap \bigcap_{i \in I} W_i 
+\;\neq\; \varnothing.
 \]
 
-A subcover of \(\mathcal{U}\) is a subfamily
+Hence \(A\) is compact by the \hyperref[prop:FIP]{finite intersection property}.
+\end{proof}
 
+Now consider the reverse direction of \autoref{prop:closed_subsets_compact}, i.e., are all compact subsets \(K \subseteq  X\) closed in \(X\) ?
+
+In general, the converse does not hold. Note that \(K = \{ x\}\) is compact for any topology \(X\). However, there are some topologies such that a singleton is not closed.
+
+In order to obtain the converse of \autoref{prop:closed_subsets_compact}, we impose \hyperlink{def:Hausdorff}{the second separation axiom}.
+
+\begin{proposition}[Point--compact set separation in Hausdorff spaces]
+\label{prop:point_compact_separation}
+Let \(X\) be Hausdorff, let \(K\subseteq X\) be compact, and let \(x\in X\setminus K\).
+Then there exist open sets \(U,V\subseteq X\) such that
 \[
-{\mathcal{U}}^{\prime } = \left\{  {{U}_{j} \mid  j \in  J}\right\}  ,\;J \subseteq  I
+K\subseteq U,\qquad x\in V,\qquad U\cap V=\varnothing.
+\]
+\end{proposition}
+
+\begin{proof}
+Let \(k \in K\). Since \(X\) is Hausdorff, there exist open sets \(U_k \ni k\) and \(V_k \ni x\) with
+\(U_k \cap V_k = \varnothing\).
+Then \(\{U_k\}_{k \in K}\) is an open cover of \(K\).
+By compactness of \(K\), there exist \(k_1,\dots,k_n \in K\) such that
+\(K \subseteq \bigcup_{i=1}^n U_{k_i}\).
+Define
+\[
+U := \bigcup_{i=1}^n U_{k_i}
+\qquad\text{and}\qquad
+V := \bigcap_{i=1}^n V_{k_i}.
+\]
+Both \(U\) and \(V\) are open; clearly \(K \subseteq U\) and \(x \in V\).
+Moreover,
+\[
+U \cap V \;\subseteq\; \bigcup_{i=1}^n \bigl(U_{k_i} \cap V_{k_i}\bigr) \;=\; \varnothing,
+\]
+so \(U\) and \(V\) are disjoint.
+This proves the claim.
+\end{proof}
+
+By making use of this separation axiom, we obtain the converse of \autoref{prop:closed_subsets_compact}:
+
+\begin{corollary}\label{cor:compact_closed_in_Hausdorff}
+If \(X\) is Hausdorff and \(K \subseteq X\) is compact, then \(K\) is closed in \(X\).
+\end{corollary}
+
+\begin{proof}
+Fix \(x \in X \setminus K\).
+By \autoref{prop:point_compact_separation}, there exist open sets \(U,V \subseteq X\) such that
+\(K \subseteq U\), \(x \in V\), and \(U \cap V = \varnothing\).
+Hence \(V \subseteq X \setminus U \subseteq X \setminus K\),
+so \(x\) has an open neighborhood contained in \(X \setminus K\).
+Since this holds for every \(x \in X \setminus K\), the complement \(X \setminus K\) is open, and thus \(K\) is closed.
+\end{proof}
+
+\subsection{Continuous Functions on Compact Space}
+
+\begin{proposition}\label{prop:image_of_compact_is_compact}
+Let \(f : X \to Y\) be a continuous map between topological spaces, and let \(A \subseteq X\) be compact.  
+Then \(f(A) \subseteq Y\) is compact.
+\end{proposition}
+
+\begin{proof}
+Let \(\{U_i \mid i \in I\}\) be an open cover of \(f(A)\), i.e.
+\[
+f(A) \;\subseteq\; \bigcup_{i \in I} U_i, 
+\qquad U_i \in \mathcal{T}_Y.
+\]
+Then the preimages \(\{ f^{-1}(U_i) \mid i \in I \}\) form an open cover of \(A\), since
+\[
+A \;\subseteq\; f^{-1}\!\Bigl(\,\bigcup_{i \in I} U_i \Bigr) 
+= \bigcup_{i \in I} f^{-1}(U_i).
+\]
+By compactness of \(A\), there exists a finite subcover
+\[
+A \;\subseteq\; \bigcup_{k=1}^n f^{-1}(U_{i_k}).
+\]
+Applying \(f\) gives
+\[
+f(A) \;\subseteq\; f\!\Bigl( \,\bigcup_{k=1}^n f^{-1}(U_{i_k}) \Bigr) 
+\;\subseteq\; \bigcup_{k=1}^n U_{i_k}.
+\]
+Thus \(f(A)\) has a finite subcover, and hence is compact.
+\end{proof}
+
+\begin{corollary}\label{cor:extreme_value}
+\begin{enumerate}
+\item[\textbf{1.}]
+Suppose \(X\) is compact, and \(f : X \to \mathbb{R}\) is continuous.  
+Then \(f(X)\) is closed and bounded.  
+In particular, there exist \(m, M \in X\) such that
+\[
+f(m) \;\leq\; f(x) \;\leq\; f(M), \qquad \forall x \in X.
 \]
 
-such that \(\mathop{\bigcup }\limits_{{j \in  J}}{U}_{j} = X\) .
-
-If \(J\) has finitely many elements, we say \({\mathcal{U}}^{\prime }\) is a finite subcover of \(X\) .
-
-We say \(X\) is compact if any open cover of \(X\) has a finite subcover.
-
-If \(A \subseteq  X\) has a subspace topology. then \(A\) is compact iff for any open collection of open sets (in \(X\) ) \(\left\{  {U}_{i}\right\}\) such that \(A \subseteq  \mathop{\bigcup }\limits_{{i \in  I}}{U}_{i}\) , there exists a fintie subcover \(A \subseteq  \mathop{\bigcup }\limits_{{k = 1}}^{n}{U}_{{i}_{k}}\) .
-
-Proposition 4.15 Let \(X\) be a topological space. The followings are equivalent:
-
-1. The space \(X\) is compact
-
-2. If \(\left\{  {{V}_{i} \mid  i \in  I}\right\}\) is a collection of closed subsets in \(X\) such that
-
+\item[\textbf{2.}]
+Suppose moreover that \(X\) is connected.  
+Then
 \[
-\mathop{\bigcap }\limits_{{j \in  J}}{V}_{j} \neq  \varnothing ,\;\text{ for all finite }J \subseteq  I,
+f(X) \;=\; [\, f(m), \, f(M) \,].
+\]
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(1) By \autoref{prop:image_of_compact_is_compact}, \(f(X)\) is compact in \(\mathbb{R}\).  
+By the Heine--Borel theorem, compact subsets of \(\mathbb{R}\) are closed and bounded.  
+Hence \(f(X)\) attains both its minimum and maximum values at some points \(m, M \in X\).  
+
+\smallskip
+(2) If \(X\) is also connected, then by continuity of \(f\), the image \(f(X)\) is connected.  
+But the only connected subsets of \(\mathbb{R}\) are intervals.  
+Since \(f(X)\) is compact, it must be a closed interval.  
+Thus
+\[
+f(X) = [\, f(m), f(M) \,]. \qedhere
+\]
+\end{proof}
+
+\begin{lemma}[Tube Lemma]\label{lem:tube}
+Let \(X, Y\) be topological spaces, and assume \(Y\) is compact.  
+If \(W \subseteq X \times Y\) is open and 
+\[
+\{x_0\} \times Y \subseteq W,
+\]
+then there exists an open neighborhood \(U \subseteq X\) of \(x_0\) such that 
+\[
+U \times Y \subseteq W.
+\]
+\end{lemma}
+
+\begin{proof}
+For each \(y \in Y\), since \((x_0, y) \in W\) and \(W\) is open, there exist neighborhoods 
+\(U_y \subseteq X\), \(V_y \subseteq Y\) such that
+\[
+(x_0, y) \in U_y \times V_y \subseteq W.
+\]
+Then \(\{V_y : y \in Y\}\) is an open cover of \(Y\).  
+By compactness, there exist finitely many points \(y_1, \ldots, y_n \in Y\) such that
+\[
+Y \subseteq V_{y_1} \cup \cdots \cup V_{y_n}.
+\]
+Define
+\[
+U \;:=\; U_{y_1} \cap \cdots \cap U_{y_n}.
+\]
+Then \(U\) is an open neighborhood of \(x_0\), and we have
+\[
+U \times Y \subseteq (U_{y_1} \times V_{y_1}) \cup \cdots \cup (U_{y_n} \times V_{y_n})
+\subseteq W.
+\]
+Thus the claim follows.
+\end{proof}
+
+\begin{theorem}[Tychonoff for finite products]\label{thm:product_compact}
+Let \(X,Y\) be topological spaces. Then \(X \times Y\) is compact under the product topology 
+if and only if both \(X\) and \(Y\) are compact.
+\end{theorem}
+
+\begin{proof}
+\noindent(\(\Rightarrow\)) Suppose \(X \times Y\) is compact.  
+Consider the projection maps
+\[
+p_X : X \times Y \to X, 
+\qquad 
+p_Y : X \times Y \to Y.
+\]
+These are continuous, so by \autoref{prop:image_of_compact_is_compact} the images
+\(p_X(X \times Y) = X\) and \(p_Y(X \times Y) = Y\) are compact.
+
+\smallskip
+\noindent(\(\Leftarrow\)) Suppose \(X\) and \(Y\) are compact.  
+Let \(\{W_i\}_{i \in I}\) be an open cover of \(X \times Y\).  
+Fix \(x_0 \in X\). Then \(\{x_0\} \times Y\) is compact, so it is covered by finitely many 
+\(W_{i_1}, \dots, W_{i_n}\).  
+Define
+\[
+W := W_{i_1} \cup \cdots \cup W_{i_n},
+\]
+which is an open neighborhood of \(\{x_0\} \times Y\).  
+By the \hyperref[lem:tube]{tube lemma}, there exists an open neighborhood \(U_{x_0} \subseteq X\) of \(x_0\) such that
+\[
+U_{x_0} \times Y \subseteq W.
 \]
 
-then \({ \cap  }_{i \in  I}{V}_{i} \neq  \varnothing\) .
-
-Compactness is an intrisical property, i.e., we do not need to worry about which underlying space for this definition.
-
-\begin{itemize}
-\item Example 4.6 1. \(X \subseteq  {\mathbb{R}}^{n}\) is compact iff \(X\) is closed and bounded. (Heine-Borel)
-\end{itemize}
-
-2. Let \(K \subseteq  {\mathbb{R}}^{n}\) be compact, then define the set
-
-\(\mathcal{C}\left( K\right)  = \{\) all continuous mapping \(f : K \rightarrow  \mathbb{R}\}\)
-
-Note that the \({d}_{\infty }\) metric associated with \(\mathcal{C}\left( K\right)\) , say \(\parallel f{\parallel }_{\infty } = \mathop{\sup }\limits_{{k \in  K}}f\left( k\right)\) , is well-defined.
-
-Under the metric space \(\left( {\mathcal{C}\left( K\right) ,{d}_{\infty }}\right)\) , any \(\mathcal{J} \subseteq  \mathcal{C}\left( K\right)\) is compact, if and only if \(\mathcal{J}\) is
-
-closed, bounded, and equi-continuous. (Aresul-Ascoli)
-
-Therefore, we can see that the compactness is not equivalent to the closedness together with boundedness.
-
-Proposition 4.16 Let \(X\) be a compact space, then all closed subset \(A \subseteq  X\) are compact.
-
-Proof. Let \(\left\{  {{V}_{i} \mid  i \in  I}\right\}\) be a collection of closed subsets in \(A\) such that
-
+Thus \(\{U_{x_0} : x_0 \in X\}\) is an open cover of \(X\).  
+By compactness of \(X\), choose finitely many \(x_1,\dots,x_m \in X\) such that
 \[
-{ \cap  }_{j \in  J}{V}_{j} \neq  \varnothing ,\;\text{ for any finite }J \subseteq  I\text{ . }
+X = U_{x_1} \cup \cdots \cup U_{x_m}.
 \]
-
-As \(A\) is closed in \(X\) , we imply \({V}_{j}\) is closed in \(X\) .
-
-Due to the compactness of \(X\) and proposition (4.15), we imply
-
-\[
-{ \cap  }_{i \in  I}{V}_{i} \neq  \varnothing
-\]
-
-By the reverse direction of proposition (4.15), we imply \(A\) is compact.
-
-Now consider the reverse direction of proposition (4.16), i.e., are all compact subsets \(K \subseteq  X\) closed in \(X\) ?
-
-In general, the converse does not hold. Note that \(K = \{ x\}\) is compact for any topology \(X\) . However, there are some topologies such that \(\{ x\}\) is closed.
-
-In order to obtain the converse of proposition (4.16), we need to obtain another
-
-\section*{separation axiom:}
-
-Proposition 4.17 Let \(X\) be Hausdorff, \(K \subseteq  X\) be compact, and \(x \in  X \smallsetminus  K\) . Then there exists open \(U,V \subseteq  X\) such that \(U \cap  V = \varnothing\) and
-
-\[
-U \cap  V = \varnothing ,\;K \subseteq  U,\;x \in  V.
-\]
-
-Proof. Let \(k \in  K\) , then by Hausdorffness, there exists open \({U}_{k} \ni  k,{V}_{k} \ni  x\) such that \({U}_{k} \cap  {V}_{k} = \varnothing\) . Therefore, \({\left\{  {U}_{k}\right\}  }_{k \in  K}\) forms an open cover of \(K\) . By compactness of \(K\) , \({\left\{  {U}_{{k}_{i}}\right\}  }_{i = 1}^{n}\) covers \(K\) . Constructing the set
-
-\[
-U \mathrel{\text{ := }} \mathop{\bigcup }\limits_{{i = 1}}^{n}{U}_{{k}_{i}},\;V = \mathop{\bigcap }\limits_{{i = 1}}^{n}{V}_{{k}_{i}}
-\]
-
-gives the desired result.
-
-By making use of this separation axiom, we obtain the converse of proposition (4.16):
-
-Corollary 4.3 All compact \(K\) in Hausdorff \(X\) is closed.
-
-Proof. For \(\forall x \in  X \smallsetminus  K\) , by proposition (4.17) there exists open \(V\) such that \(x \in  V \subseteq  X \smallsetminus  K\) , and therefore \(X \smallsetminus  K\) is open.
-
-\section*{5.3. Monday for MAT4002}
-
-\section*{5.3.1. Continuous Functions on Compact Space}
-
-Proposition 5.3 Let \(f : X \rightarrow  Y\) be continuous function on topological spaces, with \(A \subseteq  X\) compact. Then \(f\left( A\right)  \subseteq  Y\) is compact.
-
-Proof. Let \(\left\{  {{U}_{i} \mid  i \in  I}\right\}\) be an open cover of \(f\left( A\right)\) , i.e.,
-
-\[
-f\left( A\right)  \subseteq  \mathop{\bigcup }\limits_{{i \in  I}}{U}_{i},\;{U}_{i} \in  {\mathcal{T}}_{Y}
-\]
-
-It follows that \(\left\{  {{f}^{-1}\left( {U}_{i}\right)  \mid  i \in  I}\right\}\) is an open cover of \(A\) :
-
-\[
-A \subseteq  {f}^{-1}\left( {\mathop{\bigcup }\limits_{{i \in  I}}{U}_{i}}\right)  = \mathop{\bigcup }\limits_{{i \in  I}}{f}^{-1}\left( {U}_{i}\right)
-\]
-
-By the compactness of \(A\) , there exists finite subcover of \(A\) :
-
-\[
-A \subseteq  \mathop{\bigcup }\limits_{{k = 1}}^{n}{f}^{-1}\left( {U}_{{i}_{k}}\right)
-\]
-
-which implies the constructed finite subcover of \(f\left( A\right)\) :
-
-\[
-f\left( A\right)  \subseteq  f\left( {{ \cup  }_{k = 1}^{n}{f}^{-1}\left( {U}_{{i}_{k}}\right) }\right)
-\]
-
-\[
-= {\bigcup }_{k = 1}^{n}{U}_{{i}_{k}}
-\]
-
-lary 5.2 1. Suppose that \(X\) is compact, and the mapping \(f : X \rightarrow  \mathbb{R}\) is continuous, then \(f\left( X\right)\) is closed and bounded, i.e., there exists \(m,M \in  X\) such that
-
-\[
-f\left( m\right)  \leq  f\left( x\right)  \leq  f\left( M\right) ,\forall x \in  X.
-\]
-
-2. Suppose moreover that \(X\) is connected, then
-
-\[
-f\left( X\right)  = \left\lbrack  {f\left( m\right) ,f\left( M\right) }\right\rbrack  .
-\]
-
-Theorem 5.2 The space \(X,Y\) are compact iff \(X \times  Y\) is compact under product topology.
-
-Proof. 1. Sufficiency: Given that \(X \times  Y\) is compact, consider the projection mapping (which is continuous):
-
-\[
-\left\{  \begin{array}{l} {P}_{X} : X \times  Y \rightarrow  X \\  {P}_{Y} : X \times  Y \rightarrow  Y \end{array}\right.
-\]
-
-By applying proposition (5.3), \({P}_{X}\left( {X \times  Y}\right)  = X,{P}_{Y}\left( {X \times  Y}\right)  = Y\) are both compact.
-
-2. Necessity: Suppose that \({\left\{  {W}_{i}\right\}  }_{i \in  I}\) is an open cover of \(X \times  Y\) . Each open set \({W}_{i}\) can be written as:
-
-\[
-{W}_{i} = \mathop{\bigcup }\limits_{{j \in  {\mathcal{J}}_{i}}}{U}_{ij} \times  {V}_{ij},\;{U}_{ij} \in  {\mathcal{T}}_{X},{V}_{ij} \in  {\mathcal{T}}_{Y}.
-\]
-
 It follows that
-
 \[
-X \times  Y = \mathop{\bigcup }\limits_{{\left( {i,j}\right)  \in  K}}{U}_{ij} \times  {V}_{ij},\;K = \left\{  {\left( {i,j}\right)  \mid  i \in  I,j \in  {\mathcal{J}}_{i}}\right\}
+X \times Y \subseteq \bigcup_{\ell=1}^m \bigl(U_{x_\ell} \times Y \bigr) 
+\subseteq \bigcup_{\ell=1}^m \bigl(W_{i_1} \cup \cdots \cup W_{i_n}\bigr),
 \]
+a finite union of members of the original cover.  
+Therefore \(X \times Y\) is compact.
+\end{proof}
 
-Therefore, it suffices to show \(\left\{  {{U}_{ij} \times  {V}_{ij} \mid  \left( {i,j}\right)  \in  K}\right\}\) has a finite subcover of \(X \times  Y\) .
+\begin{theorem}\label{thm:compact_hausdorff_homeo}
+Suppose that \(X\) is compact, \(Y\) is Hausdorff, and 
+\(f : X \to Y\) is a continuous bijection. Then \(f\) is a homeomorphism.
+\end{theorem}
 
-\begin{itemize}
-\item Note that \(X \times  \{ y\}  \subseteq  \mathop{\bigcup }\limits_{{\left( {i,j}\right)  \in  K}}{U}_{ij} \times  {V}_{ij}\) is compact for each \(y \in  Y\) , which implies there exists finite \({S}_{y} \in  K\) such that
-\end{itemize}
+\begin{proof}
+Since \(f\) is bijective, to show that \(f^{-1}\) is continuous it suffices to prove that
+\((f^{-1})^{-1}(V) = f(V)\) is closed in \(Y\) for every closed set \(V \subseteq X\).
 
+
+Let \(V \subseteq X\) be closed. Then \(V\) is compact since closed subsets of a compact space are compact, by \autoref{prop:closed_subsets_compact}.  
+By continuity of \(f\) and \autoref{prop:image_of_compact_is_compact}.  , the image \(f(V)\) is compact in \(Y\).
+Since \(Y\) is Hausdorff, compact subsets are closed (see \autoref{cor:compact_closed_in_Hausdorff}).  
+Hence \(f(V)\) is closed in \(Y\).
+
+Thus, for every closed set \(V \subseteq X\), the image \(f(V)\) is closed in \(Y\).  
+This is exactly the statement that \(f^{-1}\) is continuous. Therefore \(f\) is a homeomorphism.
+\end{proof}
+
+\begin{corollary}\label{cor:injective_compact_homeo_onto_image}
+If \(X\) is compact, \(Y\) is Hausdorff, and \(f : X \to Y\) is injective and continuous, then
 \[
-X \times  \{ y\}  \subseteq  \mathop{\bigcup }\limits_{{s \in  {S}_{y}}}{U}_{s} \times  {V}_{s}
+f : X \longrightarrow f(X)
 \]
+is a homeomorphism (where \(f(X)\) carries the subspace topology from \(Y\)).
+\end{corollary}
 
-\begin{itemize}
-\item w.l.o.g., assume that \(y \in  {V}_{s},\forall s \in  {S}_{y}\) , since we can remove the \({U}_{s} \times  {V}_{s}\) such that \(y \notin  {V}_{s}\) . Define the set \({V}_{y} \mathrel{\text{ := }} { \cap  }_{s \in  {S}_{y}}{V}_{s}\) , which is an open set containing \(y\) . We imply \({\left\{  {V}_{y}\right\}  }_{y \in  Y}\) forms an open cover of \(Y\) . By the compactness of \(Y\) ,
-\end{itemize}
-
+\begin{example}[Second proof of \(S^{1}\times S^{1}\) is isomorphic to a torus]\label{ex:S1xS1_torus}
+Identify \(S^{1}=\{e^{i\theta} : \theta\in[0,2\pi)\}\subset\mathbb{C}\).
+Define
 \[
-\left\{  {{V}_{{y}_{1}},\ldots ,{V}_{{y}_{m}}}\right\}
+f : S^{1}\times S^{1} \longrightarrow \mathbb{R}^{3},\qquad
+\bigl(e^{i\theta},e^{i\phi}\bigr) \longmapsto
+\bigl((R+r\cos\theta)\cos\phi,\ (R+r\cos\theta)\sin\phi,\ r\sin\theta\bigr),
 \]
-
-forms a finite subcover of \(Y\) .
+with parameters \(R>r>0\). Let \(T:=f(S^{1}\times S^{1})\subset\mathbb{R}^{3}\).
 
 \begin{itemize}
-\item For each \(\ell  = 1,\ldots ,m\) ,
+\item \(X:=S^{1}\times S^{1}\) is compact, and \(\mathbb{R}^{3}\) is Hausdorff.
+\item \(f\) is continuous and injective (this is the standard parametrization of a ring torus).
+\item The image \(T\) is the (embedded) \emph{ring torus} in \(\mathbb{R}^{3}\) with major radius \(R\) and minor radius \(r\).
 \end{itemize}
 
+By \autoref{cor:injective_compact_homeo_onto_image}, a continuous injective map from a compact space into a Hausdorff space
+is a homeomorphism onto its image. Hence \(f: S^{1}\times S^{1}\to T\) is a homeomorphism, i.e.
 \[
-X \times  \left\{  {y}_{\ell }\right\}   \subseteq  \mathop{\bigcup }\limits_{{s \in  {S}_{{y}_{\ell }}}}{U}_{s} \times  {V}_{s}
+S^{1}\times S^{1}\ \cong\ T\ \subset \mathbb{R}^{3}.
 \]
+\end{example}
 
-Note that for any \(\left( {x,y}\right)  \in  X \times  Y\) , there exists \(\ell  \in  \{ 1,\ldots ,m\}\) such that \(y \in  {V}_{y\ell }\) ,
 
-i.e., \(y \in  {V}_{s}\) for \(\forall s \in  {S}_{y\ell }\) . Therefore,
 
+\begin{definition}[Sequential Compactness]\label{def:sequential_compact}
+A topological space \(X\) is \emph{sequentially compact} if every sequence in \(X\) admits a convergent subsequence, i.e., for every sequence \(\{x_n\}_{n \in \mathbb{N}} \subseteq X\), there exists a subsequence \(\{x_{n_k}\}_{k \in \mathbb{N}}\) and a point \(x \in X\) such that 
 \[
-X \times  Y = \mathop{\bigcup }\limits_{{\ell  = 1}}^{m}\mathop{\bigcup }\limits_{{s \in  {S}_{{y}_{\ell }}}}{U}_{s} \times  {V}_{s}
+x_{n_k} \to x \quad \text{in } X.
 \]
+\end{definition}
 
-Now pick
+In a metric space \((X,d)\), compactness and sequential compactness are equivalent.  
+In particular, for \(\mathbb{R}^n\) with the Euclidean metric, a subset is compact 
+if and only if it is sequentially compact. (Check notes for MAT3006)
 
-\[
-{I}^{\prime } = \left\{  {i \in  I \mid  \left( {i,j}\right)  \in  { \cup  }_{\ell  = 1}^{m}{S}_{{y}_{\ell }}}\right\}  ,
-\]
-
-we imply \(X \times  Y = \mathop{\bigcup }\limits_{{{i}^{\prime } \in  {I}^{\prime }}}{W}_{i}\) and \({I}^{\prime }\) is finite.
-
-Theorem 5.3 Suppose that \(X\) is compact, \(Y\) is Hausdorff, \(f : X \rightarrow  Y\) is continuous, bijective, then \(f\) is a homeomorphism.
-
-Proof. It suffices to show \({f}^{-1}\) is continuous. Therefore, it suffices to show \({\left( {f}^{-1}\right) }^{-1}\left( V\right)\) is closed, given that \(V\) is closed in \(X\) :
-
-Let \(V \subseteq  X\) be closed. Then \(V\) is compact, which implies \(f\left( V\right)\) is compact. Since \(f\left( V\right)  \subseteq  Y\) is Hausdorff, we imply \(f\left( V\right)\) is compact, i.e., \(f\left( V\right)\) is closed.
-
-\section*{5.6. Wednesday for MAT4002}
-
-\section*{5.6.1. Remarks on Compactness}
-
-Theorem 5.5 \(X\) is compact, \(Y\) is Hausdorff, \(f : X \rightarrow  Y\) is continuous and bijective. Then \(X\) is homeomorphic to \(Y\)
-
-Corollary 5.3 If \(X\) is compact, \(Y\) is Hausdorff, \(f : X \rightarrow  Y\) is injective and continous, then \(f : X \rightarrow  f\left( X\right)\) is homeomorphisc.
-
-\begin{itemize}
-\item Example 5.7 Here we give another proof for the fact that \({S}^{1} \times  {S}^{1}\) is homeomorphic to donut. Construct the mapping
-\end{itemize}
-
-\(f : \;{S}^{1} \times  {S}^{1} \rightarrow  {\mathbb{R}}^{3}\)
-
-with \(\left( {{e}^{i\theta },{e}^{i\phi }}\right)  \mapsto  \left( {\left( {R + r\cos \theta }\right) \cos \phi ,\left( {R + r\cos \theta }\right) \sin \phi ,r\sin \theta }\right) \;\left( {R > r > 0}\right)\)
-
-Note that:
-
-\begin{itemize}
-\item \(X = {S}^{1} \times  {S}^{1}\) is compact, \({\mathbb{R}}^{3}\) is Hausdorff;
-\end{itemize}
-
-\begin{itemize}
-\item \(f\) is continuous and injective.
-\end{itemize}
-
-\begin{itemize}
-\item \(f\left( {{S}^{1} \times  {S}^{1}}\right)\) is a "donut".
-\end{itemize}
-
-Therefore, we conclude that \({S}^{1} \times  {S}^{1}\) is homeomorphic to donut in \({\mathbb{R}}^{3}\) .
-
-Definition 5.6 [Sequential Compactness] A topological space \(X\) is sequentially compact if every sequence in \(X\) has a convergent sub-sequence.
-
-In \({\mathbb{R}}^{n}\) , the compactness is equivalent to sequential compactness. The same goes for any metric space(X, d). (Check notes for MAT3006)
-
-However, compactness and sequential compactness is different for topological spaces in general.
+\begin{remark}
+For general topological spaces, compactness and sequential compactness need not coincide.  
+For example, the first uncountable ordinal \(\omega_1\) with the order topology is compact but not sequentially compact.
+\end{remark}

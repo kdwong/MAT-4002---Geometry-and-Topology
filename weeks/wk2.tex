@@ -1,5 +1,5 @@
 
-\chapter{Topological Spaces}
+\chapter{Foundations of Topology}
 Now we can generalize our observations on metric spaces to topological spaces:
 \begin{definition}[Topological Space] A topological space $(X, \mathcal{T})$ consists of a (non-empty) set \(X\), and a family of subsets $\mathcal{T}$ of \(X\) such that:
 
@@ -21,12 +21,12 @@ defines a topology on \(X\).
 \begin{definition} 
 For any set $X$, define the discrete topology by
 \[
-{\mathcal{T}}_{\text{dis}} := \{ \text{all subsets of}X\}
+\mathcal{T}_{\mathrm{dis}} := \{ \text{all subsets of }X\}
 \]
-It’s clear that \({\mathcal{T}}_{\text{dis}}\) is a topology on \(X\)
+It’s clear that \(\mathcal{T}_{\mathrm{dis}}\) is a topology on \(X\)
 \end{definition}
-Note that if we use the discrete metric \(\left({X,{d}_{\text{discrete}}}\right)\) ), then all subsets are open sets. So we say 
-$(X, \mathcal{T}_{dis})$ is {\bf induced} from the discrete metric $(X, d_{discrete})$. More generally, we say $(X,\mathcal{T})$ is metrizable if \(\mathcal{T}\) is precisely the family of open subsets of some metric $d$ of $X$.
+Note that if we use the discrete metric \(\left({X,d_{\mathrm{dis}}}\right)\), then all subsets are open sets. So we say 
+$(X, \mathcal{T}_{\mathrm{dis}})$ is {\bf induced} from the discrete metric $(X, d_{\mathrm{dis}})$. More generally, we say $(X,\mathcal{T})$ is metrizable if \(\mathcal{T}\) is precisely the family of open subsets of some metric $d$ of $X$.
 
 Here is another extreme of topology with the smallest possible number of open sets:
 \begin{example}
@@ -79,7 +79,7 @@ It is {\bf important} to say that \(V\) is closed in \(X\). You need to specify 
 
 \section{Convergence}
 Inspired by the discussions in Chapter 1 on metric spaces, we have:
-\begin{definition}[Convergence] A sequence \(\left\{  x_n\right\}\) of a topological space $(X, \mathcal{T})$ converges to \(x \in  X\) if \(\forall U \ni  x\) is open, there \(\exists N\) such that \(x_n \in  U,\forall n \geq  N\).
+\begin{definition}[Convergence] A sequence \(\left\{  x_n\right\}\) of a topological space $(X, \mathcal{T})$ converges to \(x \in  X\) if for all open \(\ U \ni  x\), there exists \(N\) such that \(x_n \in  U,\forall n \geq  N\).
 \end{definition}
 
 \begin{example} \begin{enumerate}
@@ -96,8 +96,9 @@ x_n \in  U\left({ = X}\right),\forall n \geq  1\text{.}
 
 \item Consider the topological space \(\left({X,{\mathcal{T}}_{\text{discrete}}}\right)\), the sequence \(\left\{  x_n\right\}   \rightarrow  x\) is equivalent to saying \(x_n = x\) for all sufficiently large \(n\).
 \end{enumerate}
+\end{example}
 
-One lesson we learnt from the previous example is that the limit of sequences may not be unique. In such a case, the reason is that \(\mathcal{T}\) is not "big enough". We will give a criterion to make sure the limit is unique in the future. (Hausdorff)
+One lesson we learned from the previous example is that the limit of sequences may not be unique. In such a case, the reason is that \(\mathcal{T}\) is not "big enough". We will give a criterion to make sure the limit is unique in the future. (Hausdorff)
 
 \begin{proposition} If \(F \subseteq  \left({X,\mathcal{T}}\right)\) is closed, then for any convergent sequence \(\left\{  x_n\right\}\) in \(F\), the limit(s) are also in \(F\).
 \end{proposition}
@@ -108,12 +109,12 @@ x_n \in  X \smallsetminus  F,\forall n \geq  N
 i.e., \(x_n \notin  F\), which is a contradiction.
 \end{proof}
 
-If the $(X, T)$ is metrizable, the converse holds. Otherwise, the converse may not be true. 
-\begin{example} Consider the co-countable topological space \(\left({X = \mathbb{R},{\mathcal{T}}_{\text{co-co}}}\right)\), where
+If the $(X, \mathcal{T})$ is metrizable, the converse holds. Otherwise, the converse may not be true. 
+\begin{example} Consider the co-countable topological space \(\left({X = \mathbb{R},{\mathcal{T}}_{\text{co-count}}}\right)\), where
 \[
-{\mathcal{T}}_{\mathrm{{co}}\text{-co}} = \{ U \mid  X \smallsetminus  U\text{is a countable set}\} \bigcup \{ \varnothing \},
+{\mathcal{T}}_{\mathrm{{co-count}}} = \{ U \mid  X \smallsetminus  U\text{is a countable set}\} \bigcup \{ \varnothing \},
 \]
-and \(X\) is uncountable. Then note that \(F = \left\lbrack  {0,1}\right\rbrack   \subsetneqq  X\) is an un-countable set, and under co-countable topology, \(F \supseteq  \left\{  x_n\right\}   \rightarrow  x\) implies \(x_n = x \in  F\) for all \(n\). It’s clear that \(X \smallsetminus  F \notin  {\mathcal{T}}_{\mathrm{{co}} - \mathrm{{co}}}\), i.e., \(F\) is not closed.
+and \(X\) is uncountable. Then note that \(F = \left\lbrack  {0,1}\right\rbrack   \subsetneqq  X\) is an un-countable set, and under co-countable topology, \(F \supseteq  \left\{  x_n\right\}   \rightarrow  x\) implies \(x_n = x \in  F\) for all \(n\). It is clear that \(X \smallsetminus  F \notin  {\mathcal{T}}_{\mathrm{{co-count}}}\), that is, \(F\) is not closed.
 \end{example}
 
 \section{Interior, Closure, Boundary}
@@ -126,9 +127,8 @@ and \(X\) is uncountable. Then note that \(F = \left\lbrack  {0,1}\right\rbrack 
 \]
 
 2. The closure of \(A\) is
-
 \[
-\bar{A} = \mathop{\cap}\limits_{{A \subseteq  V,V\text{ is closed}}}V
+\bar{A} = \mathop{\bigcap}\limits_{{A \subseteq  V,V\text{ is closed}}}V
 \]
 If \(\bar{A} = X\), we say that \(A\) is dense in \(X\).
 \end{definition}
@@ -155,7 +155,9 @@ The above definition can be illustrated as follows:
 \end{example}
 
 The insights behind \autoref{def:interior_closure} is as follows:
-\begin{proposition} \begin{enumerate}
+\begin{proposition}
+\leavevmode \medskip
+\begin{enumerate}
     \item  \({A}^{ \circ }\) is the largest open subset of \(X\) contained in \(A\) ;
 
 \item \(\bar{A}\) is the smallest closed subset of \(X\) containing \(A\).
@@ -174,7 +176,7 @@ One would like to know whether \({\bar{B}}_{r}\left(x\right)  = \overline{{B}_{r
 \[
 \overline{{B}_{r}\left(x\right)} \subseteq  {\bar{B}}_{r}\left(x\right)
 \]
-However, we may find an example such that \(\overline{{B}_{r}\left(x\right)}\subsetneq {\bar{B}}_{r}\left(x\right)\) - consider the discrete metric space \(\left({X, {d}_{\text{discrete}}}\right)\). Then for all \(x \in  X\),
+However, we may find an example such that \(\overline{{B}_{r}\left(x\right)}\subsetneq {\bar{B}}_{r}\left(x\right)\) - consider the discrete metric space \(\left({X, d_{\mathrm{dis}}}\right)\). Then for all \(x \in  X\),
 \[
 B_1\left(x\right)  = \{ x\}  \Rightarrow  \overline{B_1\left(x\right)} = \{ x\},\;{\bar{B}}_{1}\left(x\right)  = X
 \]
@@ -362,29 +364,19 @@ such that both \(f\) and \({f}^{-1}\) are continuous.
 {\bf WARNING:} In linear algebra and abstract algebra, if $f: X \to Y$ is a bijective linear transformation or homomorphism, then its inverse $f^{-1}: Y \to X$ is automatically a linear transformation or homomorphism. However, this is {\bf NOT TRUE} for topological spaces! Therefore, we need to decree that both $f$ and $f^{-1}$ are continuous in our definition above.
 
 \begin{example}
-    Consider the topological spaces
-\(X,Y\) shown on left and right with the standard topology. 
-\begin{center}
-\includegraphics[width=0.3\textwidth]{images/Ch2_not_homeo.jpg}
-\end{center}
-we can see $X$ is homeomorphic to $(0,1)$; and $Y$ can be seen as \(\left\lbrack  {0,1}\right\rbrack\), and the mapping \(\left({0,1}\right)  \rightarrow  \left\lbrack  {0,1}\right\rbrack\) cannot be isomorphism:
-
-Proof. Assume otherwise the mapping \(g : \left({0,1}\right)  \rightarrow  \left\lbrack  {0,1}\right\rbrack\) is isomorphism, and therefore \({f}^{-1}\left(U\right)\) is open for any open set \(U\) in the space \(\left\lbrack  {0,1}\right\rbrack\).
-
-Construct \(U = (1 - \delta,1\rbrack\) for \(\delta  \leq  1\), and therefore \({f}^{-1}(\left({1 - \delta,1\rbrack}\right)\) is open, and therefore for the point \(x = {f}^{-1}\left(1\right)\), there exists \(\varepsilon  > 0\) such that
-
-\[
-{B}_{\varepsilon}\left(x\right)  \subseteq  {f}^{-1}(\left({1 - \delta,1\rbrack}\right)  \Rightarrow  \left\lbrack  {x - \varepsilon,x) \subseteq  {f}^{-1}\left(\left({1 - \delta,1}\right) \right) \text{, and}(x,x + \varepsilon}\right\rbrack   \subseteq  {f}^{-1}\left(\left({1 - \delta,1}\right) \right) \text{.}
-\]
-
-which implies that there exists \(a,b\) such that \(\left\lbrack  {x - \varepsilon,x}\right)  = {f}^{-1}\left(\left({a,1}\right) \right)\) and \((x,x + \varepsilon \rbrack  =\)  \({f}^{-1}\left(\left({b,1}\right) \right)\), i.e., \({f}^{-1}\left({\left({a,b}\right)  \cap  \left({b,1}\right)}\right)\) admits into two values in \(\lbrack x - \varepsilon,x)\) and \((x,x + \varepsilon \rbrack\), which is a contradiction.
+    The sets $(0,\infty)$ and $\mathbb{R}$ are homeomorphic, since
+    $$\mathrm{exp}: \mathbb{R} \to (0,\infty)$$
+    is bijective and continuous, with inverse
+    $$\log: (0,\infty) \to \mathbb{R}$$
+    also being continuous.
 \end{example}
+\section{New Spaces From Old}
 
-\section{Subspace Topology and Basis}
+\subsection{Subspace Topology and Basis}
 Let $A \subseteq X$ be a subset, we define a topology of $A$ from that of $X$:
 \begin{definition} \label{def:subspace_topology} Let \(A \subseteq  X\) be a non-empty set. The subspace topology of \(A\) is defined by any of the equivalent ways:
 \begin{enumerate}
-\item \({\mathcal{T}}_{A} := \left\{  {U \cap  A \mid  U \in  {\mathcal{T}}_{A}}\right\}.\)
+\item \({\mathcal{T}}_{A} := \left\{  {U \cap  A \mid  U \in  {\mathcal{T}}_{X}}\right\}.\)
 \item $\mathcal{T}_A$ is the coarsest topology on \(A\) such that the inclusion map
 \[
 i : \left({A,{\mathcal{T}}_{A}}\right)  \rightarrow  \left({X,{\mathcal{T}}_X}\right),\;i\left(x\right)  = x
@@ -399,6 +391,7 @@ $f : \left({Y,{\mathcal{T}}_Y}\right)  \rightarrow  \left({A,{\mathcal{T}}_{A}}\
 \end{definition}
 
 \begin{exercise} \label{ex:subspace_topology}
+\leavevmode
 \begin{enumerate}
     \item The definition (1) in \autoref{def:subspace_topology} does define a topology of \(A\).
 \item The closed sets of \(A\) under subspace topology are of the form \(V \cap  A\), where \(V\) is closed in \(X\)
@@ -421,7 +414,7 @@ are homeomorphic using the subspace topology.
 We only need to prove $(1) \Rightarrow (3)$ and $(3) \Rightarrow (1)$:
 
 
-\(\mathbf{(1) \Rightarrow (3)}\): Suppose \(\mathcal{T}_A = \{U \cap A\ |\ U \in \mathcal{T}_X\). Let \(f: (Y, \mathcal{T}_Y) \to (A, \mathcal{T}_A)\), then by $(1) \Leftrightarrow (2)$, $i: (A, \mathcal{T}_A) \to (X,\mathcal{T}_X)$ is continuous. So 
+\(\mathbf{(1) \Rightarrow (3)}\): Suppose \(\mathcal{T}_A = \{U \cap A\ |\ U \in \mathcal{T}_X\}\). Let \(f: (Y, \mathcal{T}_Y) \to (A, \mathcal{T}_A)\), then by $(1) \Leftrightarrow (2)$, $i: (A, \mathcal{T}_A) \to (X,\mathcal{T}_X)$ is continuous. So 
 $$f \text{ continuous}\ \Rightarrow\ i \circ f \text{ continuous}$$
 follows immediately from \autoref{prop:comp_cont_is_cont}.
 
@@ -453,16 +446,28 @@ Suppose \(\left({A,{\mathcal{T}}_{A}}\right)  \subseteq  \left({X,{\mathcal{T}}_
 \item \({B}^{\circ A} \supseteq  {B}^{\circ X}\).
 \end{enumerate}
 \end{proposition}
-\begin{proof} By \autoref{prop:subspace_equivalent}, \({\bar{B}}^X \cap  A\) is closed in \(A\), and \({\bar{B}}^X \cap  A \supset  B\), which implies
-\[
-{\bar{B}}^{A} \subseteq  {\bar{B}}^X\cap A
-\]
-Note that \({\bar{B}}^{A} \supset  B\) is closed in \(A\), which implies \({\bar{B}}^{A} = V \cap  A \subseteq  V\), where \(V\) is closed in \(X\). Therefore,
-\[
-{\bar{B}}^X \subseteq  V \Rightarrow  {\bar{B}}^X \cap  A \subseteq  V \cap  A = {\bar{B}}^{A}
-\]
-Therefore, \({\bar{B}}^{A} = {\bar{B}}^X \subseteq  V\)
+\begin{proof} 
+\leavevmode
+\begin{enumerate}
+    \item By \autoref{prop:subspace_equivalent}, \({\bar{B}}^X \cap  A\) is closed in \(A\), and \({\bar{B}}^X \cap  A \supseteq  B\), which implies
+    \[
+    {\bar{B}}^{A} \subseteq  {\bar{B}}^X\cap A
+    \]
+    Note that \({\bar{B}}^{A} \supseteq  B\) is closed in \(A\), which implies \({\bar{B}}^{A} = V \cap  A \subseteq  V\), where \(V\) is closed in \(X\). Therefore,
+    \[
+    {\bar{B}}^X \subseteq  V \Rightarrow  {\bar{B}}^X \cap  A \subseteq  V \cap  A = {\bar{B}}^{A}
+    \]
+    Therefore, \({\bar{B}}^{A} = {\bar{B}}^X \cap A \subseteq  V\)
+    \item Let \( x \in {B}^{\circ X}\). Then, there exists \( U_x \in \mathcal{T}_{X} \) such that \(x \in U_x \subseteq B\). This implies
+    \[
+    U_x \cap A \in \mathcal{T_A} \text{ and } x \in U_x \cap A \subseteq B.
+    \]
+    By \autoref{def:interior_closure}, \(x \in {B}^{\circ A} = \mathop{\bigcup}\limits_{U \subseteq  B ,  U \in \mathcal{T}_A}U\).
+\end{enumerate}
 \end{proof}
+\begin{remark}
+    The inclusion may be strict on 2. A simple example is when \(X = \mathbb{R}, A = [0,2] \text{ and } B = [0,1) \).
+\end{remark}
 
 As in vector spaces, we would like to look at the a subset of $\mathcal{T}$ that `generates' the whole topology $\mathcal{T}$.
 \begin{definition}[Basis] \label{def:base}
@@ -475,6 +480,7 @@ Let $(X, \mathcal{T})$ be a topological space. A family of subsets \(\mathcal{B}
 
 
 \begin{example} 
+\leavevmode
 \begin{enumerate}
     \item \(\mathcal{B} = \mathcal{T}\) is a basis.
 \item For \(X = {\mathbb{R}}^{n}\),
@@ -502,7 +508,7 @@ To show the reverse direction, let \(U \in  {\mathcal{T}}_Y\), then \(U = \matho
 \[
 {f}^{-1}\left(U\right)  = {f}^{-1}\left({\mathop{\bigcup}\limits_{{i \in  I}}{B}_{i}}\right)  = \mathop{\bigcup}\limits_{{i \in  I}}{f}^{-1}\left({B}_{i}\right)
 \]
-which is open in \(X\) by our hypothesis.
+which is open in \(X\) since it is union of opens.
 \end{proof}
 
 \begin{corollary} \label{cor:basis_homeo} Let \(f : X \rightarrow  Y\) be a bijection. Suppose there is a basis \({\mathcal{B}}_X\) of \({\mathcal{T}}_X\) such that \(\left\{  {f\left(B\right)  \mid  B \in  {\mathcal{B}}_X}\right\}\) forms a basis of \({\mathcal{T}}_Y\). Then \(X \cong  Y\) is homeomorphic.
@@ -544,12 +550,12 @@ which implies \(x \in  B_1 \cap  B_2\), i.e., \(x \in  B_x \subseteq  B_1 \cap  
 \[
 \mathop{\bigcup}\limits_{{x \in  B_1 \cap  B_2}}\{ x\}  \subseteq  \mathop{\bigcup}\limits_{{x \in  B_1 \cap  B_2}}B_x \subseteq  B_1 \cap  B_2
 \]
-i.e., \(B_1 \cap  B_2 = \mathop{\bigcup}\limits_{{x \in  B_1 \cap  B_2}}B_x\), i.e., \(B_1 \cap  B_2 \in  {\mathcal{T}}_{\mathcal{B}}\).
+it is easy to see \(\mathop{\bigcup}\limits_{{x \in  B_1 \cap  B_2}}B_x \supseteq  B_1 \cap  B_2\), \(B_1 \cap  B_2 = \mathop{\bigcup}\limits_{{x \in  B_1 \cap  B_2}}B_x\). Hence, \(B_1 \cap  B_2 \in  {\mathcal{T}}_{\mathcal{B}}\).
 
-Finally, the property that \({\mathcal{T}}_{\mathcal{B}}\) is closed under union operations can be checked directly, and hence the proof is complete.
+Finally, the property that \({\mathcal{T}}_{\mathcal{B}}\) is closed under union operations can be checked directly, which completes the proof.
 \end{proof}
 
-\section{Product Space and Disjoint Union}
+\subsection{Product Space and Disjoint Union}
 
 Now we discuss how to construct new topological spaces out of given ones is by taking Cartesian products:
 
@@ -599,12 +605,15 @@ forms a basis of the usual topology in \({\mathbb{R}}^{2}\). By \autoref{cor:bas
 \end{example}
 
 
-\begin{example} Let \({S}^{1} = \{ \left({\cos x,\sin x \mid  x \in  \left\lbrack  {0,{2\pi}}\right\rbrack }\right) \}\) be a unit circle on \({\mathbb{R}}^{2}\). Consider 
+\begin{example} Let \({S}^{1} = \{ (\cos x,\sin x) \mid  x \in  \left\lbrack  {0,{2\pi}}\right) \}\) be a unit circle on \({\mathbb{R}}^{2}\) (you can treat $S^1$ to be equipped with subspace topology of $\mathbb{R}^2$). Consider 
 \[f : {S}^{1} \times  \left({0,\infty}\right)  \rightarrow  {\mathbb{R}}^{2} \smallsetminus  \{ \mathbf{0}\}\] 
 (where $S^1 \times (0, \infty)$ is equipped with product topology) given by
 \[
-f\left({\cos x,\sin x,r}\right)  \mapsto  \left({r\cos x,r\sin x}\right).
+f\left({\cos x,\sin x,r}\right)  := \left({r\cos x,r\sin x}\right).
 \]
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/Ch2_polar_coords.png}
+\end{center}
 It’s clear that \(f\) is a bijection, and \(f\) is continuous. Moreover, the inverse \(g := {f}^{-1}\) is defined as
 \[
 g\left({a,b}\right)  = \left({\frac{a}{\sqrt{{a}^{2} + {b}^{2}}},\frac{b}{\sqrt{{a}^{2} + {b}^{2}}},\sqrt{{a}^{2} + {b}^{2}}}\right)
@@ -614,6 +623,14 @@ which is continuous as well. Therefore, the \(f : {\mathcal{S}}^{1} \times  \lef
 
 \begin{proposition} a ring torus is homeomorphic to the Cartesian product of two circles, say \({S}^{1} \times  {S}^{1} \cong  T\).
 \end{proposition}
+\begin{figure}[h]
+  \centering
+  \animategraphics[autoplay,loop,width=0.6\textwidth]{12}{images/torus_frames/frame_}{001}{047}%
+  % Fallback static frame (shows in Overleaf preview):
+  % \includegraphics[width=0.6\textwidth]{images/torus_frames/frame_001.png}
+  \caption{Ring torus degenerating into a spindle torus.(The animation only works in Adobe.)}
+\end{figure}
+
 \begin{proof} 
 Let $S^1 \times S^1 = \{(\cos(\theta),\sin(\theta),\cos(\phi),\sin(\phi))\ |\ 0 \leq \theta,\phi <2\pi\}$. The product topology of $S^1 \times S^1$ is just the subspace topology of $\mathbb{R}^4$. Define a mapping \(f : S^1  \times  S^1   \rightarrow  T\) by
 \[
@@ -621,7 +638,7 @@ f\left({\theta,\phi}\right)  = \left({\left({R + r\cos \theta}\right) \cos \phi,
 \]
 for $R > r$. Denote \(i : T \rightarrow  {\mathbb{R}}^{3}\) as the usual inclusion, then we imply
 \[
-i \circ  f : \left\lbrack  {0,{2\pi}}\right\rbrack   \times  \left\lbrack  {0,{2\pi}}\right\rbrack   \rightarrow  {\mathbb{R}}^{3}\text{ is continuous}
+i \circ  f : \left\lbrack  {0,{2\pi}}\right)   \times  \left\lbrack  {0,{2\pi}}\right)   \rightarrow  {\mathbb{R}}^{3}\text{ is continuous}
 \]
 Therefore, by \autoref{prop:subspace_equivalent} we imply \(f : \left\lbrack  {0,{2\pi}}\right)   \times  \left\lbrack  {0,{2\pi}}\right)   \rightarrow  T\) is continuous. We can also show it is bijective, and \({f}^{-1}\) is continuous as in the previous example which are left as exercises.
 \end{proof}
@@ -652,18 +669,18 @@ namely, the mapping \(F : Z \rightarrow  X \times  Y\) is continuous iff both \(
 \begin{enumerate}
     \item  It suffices to show any topology \(\mathcal{T}\) that meets the condition in (2) must contain \({\mathcal{T}}_{\text{product}}\). We imply that For all \(U \in  {\mathcal{T}}_X,V \in  {\mathcal{T}}_Y\),
 \[
-\left\{  {\begin{array}{l} p_X^{-1}\left(U\right)  = U \times  X \in  \mathcal{T} \\  p_Y^{-1}\left(V\right)  = X \times  V \in  \mathcal{T} \end{array} \Rightarrow  \left({U \times  Y}\right)  \cap  \left({X \times  V}\right)  = \left({U \cap  X}\right)  \times  \left({Y \cap  V}\right)  = U \times  V \in  \mathcal{T},}\right.
+\left\{  {\begin{array}{l} p_X^{-1}\left(U\right)  = U \times  Y \in  \mathcal{T} \\  p_Y^{-1}\left(V\right)  = X \times  V \in  \mathcal{T} \end{array} \Rightarrow  \left({U \times  Y}\right)  \cap  \left({X \times  V}\right)  = \left({U \cap  X}\right)  \times  \left({Y \cap  V}\right)  = U \times  V \in  \mathcal{T},}\right.
 \]
 which implies \({\mathcal{B}}_{X \times  Y} \subseteq  \mathcal{T}\). Since \(\mathcal{T}\) is closed for union operation on subsets, we
-imply \({\mathcal{T}}_{\text{product topology}} \subseteq  \mathcal{T}\).
+imply \({\mathcal{T}}_{\text{product}} \subseteq  \mathcal{T}\).
 
 \item First, we show that \({\mathcal{T}}_{\text{product}}\) satisfies the commutative diagram.
 \begin{itemize}
 \item For the forward direction, by the first statement of the proposition, we imply both \(p_X \circ  F\) and \(p_Y \circ  F\) are continuous, since the composition of continuous functions are continuous as well.
 
-\item For the reverse direction, For all \(U \times  {\mathcal{T}}_X,V \in  {\mathcal{T}}_Y\),
+\item For the reverse direction, For all \(U \in  {\mathcal{T}}_X,V \in  {\mathcal{T}}_Y\),
 \[
-{F}^{-1}\left({U \times  V}\right)  = {\left(p_X \circ  F\right)}^{-1}\left(X\right)  \cap  {\left(p_Y \circ  F\right)}^{-1}\left(Y\right),
+{F}^{-1}\left({U \times  V}\right)  = {\left(p_X \circ  F\right)}^{-1}\left(U\right)  \cap  {\left(p_Y \circ  F\right)}^{-1}\left(V\right),
 \]
 which is open due to the continuity of \(p_X \circ  F\) and \(p_Y \circ  F\).
 \end{itemize}
@@ -686,7 +703,7 @@ Consequently, the proof is complete.
 \[
 X\coprod Y := \left({X\times \{ 0\}}\right)  \cup  \left({Y\times \{ 1\}}\right),
 \]
-where \(U \in \mathcal{T}_{X\coprod Y}\) is open in \(X \coprod  Y\) if
+where \(\mathcal{T}_{X\coprod Y}\) consists of all \(U \subseteq X \coprod  Y\) satisfying:
 \begin{itemize}
     \item \(U \cap  \left({X\times \{ 0\}}\right)\) is open in \(X \times  \{ 0\}\) ; and
     \item \(U \cap  \left({Y\times \{ 1\}}\right)\) is open in \(Y \times  \{ 1\}\).

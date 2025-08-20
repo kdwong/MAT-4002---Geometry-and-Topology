@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{animate}
 
 % Math packages
 \usepackage{amsmath, amssymb, amsthm, mathtools, bm}
@@ -14,12 +15,12 @@
 \usepackage{setspace}
 \onehalfspacing
 
-% Theorem environments with cleveref support
+% Theorem environments with cleveref/aliascnt support
 \usepackage{aliascnt}
-
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[chapter]
+
 \newaliascnt{lemma}{theorem}
 \newtheorem{lemma}[lemma]{Lemma}
 \aliascntresetthe{lemma}
@@ -30,17 +31,14 @@
 \aliascntresetthe{proposition}
 \providecommand*{\propositionautorefname}{Proposition}
 
-
-\newaliascnt{exercise}{theorem}
-\newtheorem{exercise}[exercise]{Exercise}
-\aliascntresetthe{exercise}
-\providecommand*{\propositionautorefname}{Exercise}
-
-
 \newaliascnt{corollary}{theorem}
 \newtheorem{corollary}[corollary]{Corollary}
 \aliascntresetthe{corollary}
 \providecommand*{\corollaryautorefname}{Corollary}
+
+% Exercises: separate counter (per chapter)
+\newtheorem{exercise}{Exercise}[chapter]
+\providecommand*{\exerciseautorefname}{Exercise}
 
 \theoremstyle{definition}
 \newaliascnt{definition}{theorem}
@@ -95,7 +93,6 @@
 \tableofcontents
 
 % Include chapters
-
 \input{frontmatter/Notations}
 \input{weeks/wk1}
 \input{weeks/wk2}
@@ -106,7 +103,5 @@
 \input{weeks/wk7}
 \input{weeks/wk8}
 \input{weeks/wk9}
-
-
 
 \end{document}
