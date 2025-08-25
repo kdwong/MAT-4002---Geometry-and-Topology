@@ -1,496 +1,307 @@
 
 
-\chapter{Some Group Theory}
+\chapter{Group Theory}
+In order to have a more systemetic study on topological spaces, we need to use some abstract algebra to `extract' some properties of these spaces. In this chapter, we will focus on some aspects of group theory, which is covered in any standard abstract algebra course (e.g. MAT3004). 
+\section{Basic Group Theory}
+When one talks about algebraic structure, we would think of addition $a + b$ and multiplication $a \cdot b$. In general, we make the following definition:
+\begin{definition}
+    Let $S$ be a set. A {\bf binary operation} $S$ is a map
+    $$\ast: S \times S \to S.$$
+    A subset $T \subseteq S$ is {\bf closed under $\ast$} if for all $a, b \in T$, $a \ast b \in T$.
+\end{definition}
 
-Group is a highlight of our course, which interwises topology and algebra. I assume that most students have learnt abstract algebra course MAT3004, and encourage those without this knowledge to read the notes for group posted on blackboard.
+\begin{definition} \label{def-group}
+    A group $G$ is a set along with a binary operation $\ast: G \times G \to G$ satisfying:
+    \begin{itemize}
+        \item $(a \ast b) \ast c = a \ast (b \ast c)$;
+        \item There exists $e\in G$ such that $e \ast g = g \ast e = g$ for all $g \in G$.
+        \item For all $g \in G$, there exists $g^{-1} \in G$ such that $g \ast g^{-1} = g^{-1} \ast g = e$.
+    \end{itemize}
+\end{definition}
 
-\section*{10.6. Wednesday for MAT4002}
+\begin{example}
+    \begin{enumerate}
+        \item $(\mathbb{Z},+)$, $(\mathbb{Q},+)$, $(\mathbb{R},+)$, $(\mathbb{C},+)$ are groups.
+        \item $(\mathbb{R}[x],+)$ is a group.
+        \item (Modular arithmetic) $(\mathbb{Z}_n,+)$ is a group.
+        \item As for multiplication, $(R,\cdot)$ is not a group for $R = \mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{R}[x]$ or $\mathbb{Z}_n$, since $0^{-1}$ does not exist in all cases.
+        \item $\mathbb{Z} \backslash \{0\}$ is still not a group, since $3^{-1}$ does not exist. But $(\mathbb{Q}\backslash \{0\}, \cdot)$ is a group.
+        \item $(GL_n(\mathbb{R}), \cdot)$ is a group under matrix multiplication.
+        \item Consider the regular $n$-gon \(P_n \subseteq {\mathbb{R}}^{2}\) centered at the origin. Let \({D}_{2n}\) be the symmetries of $P_n$, for instance $r \in D_{2n}$ is the rotation of $P_n$ by $2\pi/n$ anti-clockwise about the origin, and $s \in D_{2n}$ be any reflection of $P_n$. Then obviously
+        $$r^n = e, \quad s^2 = e$$
+        in $D_n$. Indeed, all elements of \({D}_{2n}\) can be obtained by \({r}^{i}{s}^{j},0 \leq  i \leq  r-1,\ 0 \leq  j \leq  1\).
+    \end{enumerate}
+\end{example}    
 
-\section*{10.6.1. Reviewing On Groups}
+\begin{definition}
+    A group $(G, \ast)$ is called {\bf abelian/commutative} if
+    $$a \ast b = b \ast a$$
+    for all $a, b \in G$.
+\end{definition}
 
-\begin{itemize}
-\item Example 10.4 Let \({D}_{2n}\) be the regular polygon \(P\) with \({2n}\) sides in \({\mathbb{R}}^{2}\) , centered at the origin. It’s clear that \({D}_{2n}\) is invariant with \({2n}\) rotations, or with 2 reflections. Let \(a\) denote the rotation of \({D}_{2n}\) clockwise by degree \(\pi /n\) , and \(b\) denote the reflection over lines through the origin.
-\end{itemize}
+\begin{example}
+$(\mathbb{Z},+)$, $(\mathbb{Q},+)$, $(\mathbb{R},+)$, $(\mathbb{C},+)$, $(\mathbb{R}[x],+)$, $(\mathbb{Z}_n,+)$, $(\mathbb{Q}\backslash \{0\}, \cdot)$ are commutative, but $(GL_n(\mathbb{R}), \cdot)$, $(D_{2n}, \cdot)$ are not commutative.
+\end{example}   
 
-As a result, \(\left\{  {e,a,{a}^{2},\ldots ,{a}^{n - 1}}\right\}\) forms a group; and \(\{ e,b\}\) forms a group.
 
-Therefore, all elements of \({D}_{g}\) can be obtained by \({a}^{i}{b}^{j},0 \leq  i \leq  3,0 \leq  j \leq  1\) .
-
-Any finite operations of rotation (the rotation degree is a multiple of \(\pi /n\) ) and reflection can be represented as \({a}^{i}{b}^{j}\) .
-
-Geometrically, we can check that \({ba} = {a}^{n - 1}b\) .
-
-Definition 10.7 [Product Group] Let \(G,H\) be two groups. The product group \(\left( {G \times  H, * }\right)\) is defined as
-
+\begin{definition} Let \(G,H\) be two groups. The product group \(\left( {G \times  H, * }\right)\) is defined as
 \[
 G \times  H = \{ \left( {g,h}\right)  \mid  g \in  G,h \in  H\}
 \]
+with \(\left( {{g}_{1},{h}_{1}}\right)  * \left( {{g}_{2},{h}_{2}}\right)  = \left( {{g}_{1}{g}_{2},{h}_{1}{h}_{2}}\right)\).
+\end{definition}
 
-\[
-\text{ with }\left( {{g}_{1},{h}_{1}}\right)  * \left( {{g}_{2},{h}_{2}}\right)  = \left( {{g}_{1}{g}_{2},{h}_{1}{h}_{2}}\right)
-\]
-
-For example, \(\left( {\mathbb{R} \times  \mathbb{R}, + }\right)  = \{ \left( {x,y}\right)  \mid  x,y \in  \mathbb{R}\}\) coincides with the usual \({\mathbb{R}}^{2}\) , where
-
+For example, \(\left( {\mathbb{R} \times  \mathbb{R}, + }\right)  = \{ \left( {x,y}\right)  \mid  x,y \in  \mathbb{R}\}\) coincides with the usual \({\mathbb{R}}^{2}\), where
 \[
 \left( {x,y}\right)  * \left( {{x}^{\prime },{y}^{\prime }}\right)  = \left( {x + {x}^{\prime },y + {y}^{\prime }}\right)
 \]
 
-Definition 10.8 A map between two groups \(\phi  : G \rightarrow  H\) is a homomorphism if
-
+Here is the analogue of `linear transformation' between two groups $G$ and $H$ in group theory:
+\begin{definition} A map between two groups \(\phi  : G \rightarrow  H\) is a \emph{homomorphism} if
 \[
 \phi \left( {{g}_{1} * {g}_{2}}\right)  = \phi \left( {g}_{1}\right)  * \phi \left( {g}_{2}\right)
 \]
-
 In other words, a homomorphism is a map preserving multiplications of groups.
+\end{definition}
+Following the similar idea as in linear algebra, if \(\phi  : G \rightarrow  H\) is a homomorphism, then \(\phi \left( {e}_{G}\right)  = {e}_{H}\).
 
-Follow the similar idea as in MAT3040 knowledge, if \(\phi  : G \rightarrow  H\) is a homomorphism, then \(\phi \left( {e}_{G}\right)  = {e}_{H}\) .
-
-\begin{itemize}
-\item Example 10.5 Let \(G = \left( {\mathbb{R},+,0}\right)\) , and \(H = \left\{  {{H}_{2},*,{I}_{2}}\right\}\) , with \({H}_{2}\) of the form
-\end{itemize}
-
+\begin{example} Let \(G = \left( {\mathbb{R},+,0}\right)\), and \(H = \left\{  {{H}_{2},*,{I}_{2}}\right\}\), with \({H}_{2}\) of the form
 \[
 {H}_{2} = \left\{  {\left. \left( \begin{array}{ll} 1 & x \\  0 & 1 \end{array}\right) \right| \;x \in  \mathbb{R}}\right\}
 \]
-
 Define a mapping
-
 \[
 \phi  : \;G \rightarrow  H
 \]
-
+by \(x \mapsto  \left( \begin{array}{ll} 1 & x \\  0 & 1 \end{array}\right)\). Then \(\phi\) is a homomorphism, i.e.:
 \[
-\text{ with }x \mapsto  \left( \begin{array}{ll} 1 & x \\  0 & 1 \end{array}\right)
+\phi \left( {x{ * }_{\mathbb{R}}y}\right)  = \phi \left( {x + y}\right)= \left( \begin{matrix} 1 & x + y \\  0 & 1 \end{matrix}\right)= \left( \begin{array}{ll} 1 & x \\  0 & 1 \end{array}\right) \left( \begin{array}{ll} 1 & y \\  0 & 1 \end{array}\right) = \phi \left( x\right)  *_ {{H}_{2}}\phi \left( y\right)
 \]
+\end{example}
 
-Then \(\phi\) is a homorphism:
+\begin{definition} [Isomorphism] A homomorphism \(\phi  : G \rightarrow  H\) is an isomorphism if \(\phi\) is bijective. The isomorphism between \(G\) and \(H\) is denoted as \(G \cong  H\).
+\end{definition}
 
-\[
-\phi \left( {x{ * }_{\mathbb{R}}y}\right)  = \phi \left( {x + y}\right)
-\]
-
-\[
-= \left( \begin{matrix} 1 & x + y \\  0 & 1 \end{matrix}\right)
-\]
-
-\[
-= \left( \begin{array}{ll} 1 & x \\  0 & 1 \end{array}\right) \left( \begin{array}{ll} 1 & y \\  0 & 1 \end{array}\right)
-\]
-
-\[
-= \phi \left( x\right)  * {H}_{2}\phi \left( y\right)
-\]
-
-Definition 10.9 [Isomorphism] A homomorphism \(\phi  : G \rightarrow  H\) is an isomorphism if \(\phi\) is bijective. The isomorphism between \(G\) and \(H\) is denoted as \(G \cong  H\) .
-
-Actually, a group can be represented as a Cayley Table:
-
-\begin{center}
-\adjustbox{max width=\textwidth}{
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-\multirow{5}{*}{\(G =\)} & 0 & \({g}_{1}\) & \({g}_{2}\) & ... & \({g}_{n}\) \\
-\cline{2-6}
- & \({g}_{1}\) & \({g}_{1} \circ  {g}_{1}\) & \({g}_{1} \circ  {g}_{2}\) & ... & \({g}_{1} \circ  {g}_{n}\) \\
-\cline{2-6}
- & \({g}_{2}\) & \({g}_{2} \circ  {g}_{1}\) & \({g}_{2} \circ  {g}_{2}\) & ... & \({g}_{2} \circ  {g}_{n}\) / \\
-\cline{2-6}
- & \(\vdots\) & \(\vdots\) & ... & \(\vdots\) & \(\vdots\) \\
-\cline{2-6}
- & \({g}_{n}\) & \({g}_{n} \circ  {g}_{1}\) & \({g}_{n} \circ  {g}_{2}\) & ... & \({g}_{n} \circ  {g}_{n}\) \\
-\cline{1-6}
-\hline
-\end{tabular}
-}
-\end{center}
-
-\begin{center}
-\adjustbox{max width=\textwidth}{
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-\multirow{5}{*}{\(H =\)} & 0 & \({h}_{1}\) & \({h}_{2}\) & ... & \({h}_{n}\) \\
-\cline{2-6}
- & \({h}_{1}\) & \({h}_{1} \circ  {h}_{1}\) & \({h}_{1} \circ  {h}_{2}\) & ... & \({h}_{1} \circ  {h}_{n}\) \\
-\cline{2-6}
- & \({h}_{2}\) & \({h}_{2} \circ  {h}_{1}\) & \({h}_{2} \circ  {h}_{2}\) & ... & \({h}_{2} \circ  {h}_{n}\) \\
-\cline{2-6}
- & \(\vdots\) & \(\vdots\) & ... & \(\vdots\) & \(\vdots\) \\
-\cline{2-6}
- & \({h}_{n}\) & \({h}_{n} \circ  {h}_{1}\) & \({h}_{n} \circ  {h}_{2}\) & ... & \({h}_{n} \circ  {h}_{n}\) \\
-\cline{1-6}
-\hline
-\end{tabular}
-}
-\end{center}
-
-The groups \(G \cong  H\) if and only if we can find a bijective \(\phi  : G \rightarrow  H\) such that, the Cayley
-
-Table of \(\left( {H, \circ  }\right)\) can be generated from the Cayley Table of \(\left( {G, \circ  }\right)\) by replacing each entry of \(G\) with its image under \(\phi\) .
-
-\section*{10.6.2. Free Groups}
-
-10.10 . Let \(S\) be a (finite) set, which is considered as an "alphabet".
-
+\section{Free Groups}
+\begin{definition}
+Let \(S\) be a set (the "alphabet"). 
 \begin{itemize}
-\item Define another set \({S}^{-1} \mathrel{\text{ := }} \left\{  {{x}^{-1} \in  x \in  S}\right\}\) . We insist that \(S \cap  {S}^{-1} = \varnothing\) .
-\end{itemize}
-
+\item Define \({S}^{-1} \mathrel{\text{ := }} \left\{  {s^{-1} \in  s \in  S}\right\}\) such that
 \begin{itemize}
-\item A word in \(S\) is a finite sequence \(w = {w}_{1}\cdots {w}_{m}\) , where \(m \in  {\mathbb{N}}^{ + } \cup  \{ 0\}\) , and each \({w}_{i} =  \in   \cup  {S}^{-1}\) . In particular, when \(m = 0\) , we view \(w\) as the empty sequence, denoted as \(\varnothing\) .
+    \item \(S \cap  {S}^{-1} = \varnothing\); and
+    \item the elements $(s^{-1})^{-1} \in (S^{-1})^{-1}$ satisfy \({\left( {s}^{-1}\right) }^{-1} = s\). In particular $(S^{-1})^{-1} = S$.
 \end{itemize}
+\item A \emph{word} in \(S\) is a finite sequence \(w = {w}_{1}\cdots {w}_{m}\), where \(m \in  {\mathbb{N}}^{ + } \cup  \{ 0\}\), and each \({w}_{i}  \in  S \cup  {S}^{-1}\). In particular, when \(m = 0\), we view \(w\) as the empty sequence, denoted as \(\varnothing\).
 
-\begin{itemize}
-\item The concatenation of two words \({x}_{1}\cdots {x}_{m}\) and \({y}_{1}\cdots {y}_{n}\) is the word \({x}_{1}\cdots {x}_{m}{y}_{1}\cdots {y}_{n}\)
-\end{itemize}
+\item The \emph{concatenation} of two words \({x}_{1}\cdots {x}_{m}\) and \({y}_{1}\cdots {y}_{n}\) is the word \({x}_{1}\cdots {x}_{m}{y}_{1}\cdots {y}_{n}\)
 
-\begin{itemize}
-\item Two words \(w,{w}^{\prime }\) are equivalent, denoted as \(w \sim  {w}^{\prime }\) , if there are words \({w}_{1},\ldots ,{w}_{n}\) and \(w = {w}_{1},{w}^{\prime } = {w}_{n}\) such that
-\end{itemize}
-
+\item Two words \(w,{w}^{\prime }\) are \emph{equivalent}, denoted as \(w \sim  {w}^{\prime }\), if there are words \({w}_{1},\ldots,{w}_{n}\) and \(w = {w}_{1},{w}^{\prime } = {w}_{n}\) such that $w_i$ and $w_{i+1}$ differ from each other by
 \[
-{w}_{i} = \cdots {y}_{1}x{x}^{-1}{y}_{2}\cdots ,\;{w}_{i + 1} = \cdots {y}_{1}{y}_{2}\cdots
+{w}_{i} = \cdots {y}_{1}x{x}^{-1}{y}_{2}\cdots,\quad {w}_{i + 1} = \cdots {y}_{1}{y}_{2}\cdots
 \]
-
 or
-
 \[
-{w}_{i} = \cdots {y}_{1}{y}_{2}\cdots ,\;{w}_{i + 1} = \cdots {y}_{1}x{x}^{-1}{y}_{2}\cdots
+{w}_{i} = \cdots {y}_{1}{y}_{2}\cdots,\quad {w}_{i + 1} = \cdots {y}_{1}x{x}^{-1}{y}_{2}\cdots
 \]
-
-for some \(x \in  S \cup  {S}^{-1}\) .
-
-\begin{itemize}
-\item Example 10.6 For example, \(S = \{ a,b\}\) and \({S}^{-1} = \left\{  {{a}^{-1}{b}^{-1}}\right\}\) and
+for some \(x \in  S \cup  {S}^{-1}\).
 \end{itemize}
+\end{definition}
 
+\begin{example} Let \(S = \{ a,b\}\) \({S}^{-1} = \left\{  {{a}^{-1}, {b}^{-1}}\right\}\) and
 \[
-w = {aaba}{b}^{-1}{b}^{-1}{a}^{-1}{abaab}{b}^{-1}a
+w = {aaba}{b}^{-1}{b}^{-1}{a}^{-1}{abaab}{b}^{-1}a,
+\quad {w}^{\prime } = {aaba}{b}^{-1}{b}^{-1}{a}^{-1}{abaaa}
 \]
-
-\[
-{w}^{\prime } = {aaba}{b}^{-1}{b}^{-1}{a}^{-1}{abaaa}
-\]
-
-Here \(w\) and \({w}^{\prime }\) differs by \(b{b}^{-1}\) . Therefore, \(w \sim  {w}^{\prime }\) , and \(w\) is said to be a elementary expansion of \({w}^{\prime }\) .
-
-We insist that \({\left( {s}^{-1}\right) }^{-1} = s,\forall {s}^{-1} \in  {S}^{-1}\) , since otherwise for \(x = {s}^{-1} \in  {S}^{-1}\) , we cannot define \({\left( {s}^{-1}\right) }^{-1}\) .
+Here \(w\) and \({w}^{\prime }\) differ by \(b{b}^{-1}\). Therefore, \(w \sim  {w}^{\prime }\), and \(w\) is said to be an elementary expansion of \({w}^{\prime }\).
 
 Moreover, for
-
 \[
-w = {aaba}{b}^{-1}{b}^{-1}{a}^{-1}{abaab}{b}^{-1}a
+w = {aaba}{b}^{-1}{b}^{-1}{a}^{-1}{abaab}{b}^{-1}a, \quad {w}^{\prime \prime } = {aaba}{b}^{-1}{b}^{-1}{baab}{b}^{-1}a,
 \]
+\(w\) and \({w}^{\prime \prime }\) differ by \({a}^{-1}a\), i.e., \({a}^{-1}{\left( {a}^{-1}\right) }^{-1}\), and therefore \(w \sim  {w}^{\prime \prime }\).
+\end{example}
 
-\[
-{w}^{\prime \prime } = {aaba}{b}^{-1}{b}^{-1}{baab}{b}^{-1}a,
-\]
 
-\(w\) and \({w}^{\prime \prime }\) differs by \({a}^{-1}a\) , i.e., \({a}^{-1}{\left( {a}^{-1}\right) }^{-1}\) , and therefore \(w \sim  {w}^{\prime \prime }\) .
-
-Definition 10.11 [Free Group] The free group \(F\left( S\right)\) is defined to be the equivalence class of words, i.e.,
-
+\begin{definition} [Free Group] Let $S$ be a set. The \emph{free group} \(F\left( S\right)\) is defined to be the equivalence class of words, i.e.,
 \[
 \left\lbrack  w\right\rbrack   \mathrel{\text{ := }} \left\{  {{w}^{\prime }\text{ is a word in }S \mid  w \sim  {w}^{\prime }}\right\}   \in  F\left( S\right)
 \]
+\end{definition}
 
-\(F\left( S\right)\) is indeed a group:
-
+Note that \(F\left( S\right)\) is indeed a group:
 \begin{itemize}
 \item \(\left\lbrack  w\right\rbrack   * \left\lbrack  {w}^{\prime }\right\rbrack   = \left\lbrack  {w{w}^{\prime }}\right\rbrack\) (concatenation) check \({w}_{1} \sim  {w}_{2},{u}_{1} \sim  {u}_{2}\) implies \({w}_{1}{u}_{1} \sim\)  \({w}_{2}{u}_{2}\)
-\end{itemize}
 
-\begin{itemize}
 \item Identity element: \(e = \left\lbrack  \varnothing \right\rbrack\)
-\end{itemize}
 
-\begin{itemize}
 \item Inverse element: \({\left\lbrack  {x}_{1}\cdots {x}_{n}\right\rbrack  }^{-1} = \left\lbrack  {{x}_{n}^{-1}\cdots {x}_{1}^{-1}}\right\rbrack\)
 \end{itemize}
 
-\begin{itemize}
-\item Example 10.7 Let \(S = \{ a\}\) and \({S}^{-1} = \left\{  {a}^{-1}\right\}\) . Any word \(w\) has the form
-\end{itemize}
-
+\begin{example} Let \(S = \{ a\}\) and \({S}^{-1} = \left\{  {a}^{-1}\right\}\). Any word \(w\) has the form
 \[
 w = a\cdots a{a}^{-1}\cdots {a}^{-1}a\cdots a{a}^{-1}\cdots {a}^{-1}\cdots
 \]
-
-In shorthand, we denote \(w\) as \(w = \cdots {a}^{p}{\left( {a}^{-1}\right) }^{q}{a}^{r}{\left( {a}^{-1}\right) }^{s}\cdots\) , and
-
+In shorthand, we denote \(w\) as \(w = \cdots {a}^{p}{\left( {a}^{-1}\right) }^{q}{a}^{r}{\left( {a}^{-1}\right) }^{s}\cdots\), and
 \[
 \left\lbrack  w\right\rbrack   = \left\lbrack  {\cdots {a}^{p}{\left( {a}^{-1}\right) }^{q}{a}^{r}{\left( {a}^{-1}\right) }^{s}\cdots }\right\rbrack   = \left\lbrack  {\cdots {a}^{p - 1}{\left( {a}^{-1}\right) }^{q - 1}{a}^{r}{\left( {a}^{-1}\right) }^{s}\cdots }\right\rbrack
+= \left\lbrack  {\cdots {a}^{p - 1}{\left( {a}^{-1}\right) }^{q - 2}{a}^{r - 1}{\left( {a}^{-1}\right) }^{s}\cdots }\right\rbrack
 \]
+For instance, we can always eliminate the adjacent terms \(a\) and \({a}^{-1}\) up to equivalence class. Therefore, 
+\[F\left( S\right)  = \left\{  {\cdots,\left\lbrack  {a}^{-2}\right\rbrack ,\left\lbrack  {a}^{-1}\right\rbrack ,\left\lbrack  \varnothing \right\rbrack ,\left\lbrack  a\right\rbrack ,\left\lbrack  {a}^{2}\right\rbrack ,\cdots }\right\}.\]
+It is clear that \(F\left( S\right)  \cong  \mathbb{Z}\), where the isomorphism \(\phi  : \mathbb{Z} \rightarrow  F\left( S\right)\) is \(\phi \left( n\right)  = \left\lbrack  {a}^{n}\right\rbrack\).
+\end{example}
 
-\[
-= \left\lbrack  {\cdots {a}^{p - 1}{\left( {a}^{-1}\right) }^{q - 2}{a}^{r - 1}{\left( {a}^{-1}\right) }^{s}\cdots }\right\rbrack  ,
-\]
+\begin{example} Let \(S = \{ a,b\}\) and \({S}^{-1} = \left\{  {{a}^{-1},{b}^{-1}}\right\}\). In this case, \(\left\lbrack  {ab}\right\rbrack   \neq  \left\lbrack  {ba}\right\rbrack\), and \(\left\lbrack  {a{b}^{-1}{a}^{2}{b}^{2}{a}^{-2}b}\right\rbrack\) cannot be reduced further.
 
-e.g., we can always eliminate the adjacent terms \(a\) and \({a}^{-1}\) up to equivalence class. Therefore, \(F\left( S\right)  = \left\{  {\cdots ,\left\lbrack  {a}^{-2}\right\rbrack  ,\left\lbrack  {a}^{-1}\right\rbrack  ,\left\lbrack  \varnothing \right\rbrack  ,\left\lbrack  a\right\rbrack  ,\left\lbrack  {a}^{2}\right\rbrack  ,\cdots }\right\}\) .
+Since \(F(S)\) is not an abelian group, we imply \(F\left( S\right) \ncong \mathbb{Z} \times  \mathbb{Z}\).
+\end{example}
 
-It’s clear that \(F\left( S\right)  \cong  \mathbb{Z}\) , where the isomorphism \(\phi  : \mathbb{Z} \rightarrow  F\left( S\right)\) is \(\phi \left( n\right)  = \left\lbrack  {a}^{n}\right\rbrack\) .
 
-\begin{itemize}
-\item Example 10.8 Let \(S = \{ a,b\}\) and \({S}^{-1} = \left\{  {{a}^{-1},{b}^{-1}}\right\}\) . In this case, \(\left\lbrack  {ab}\right\rbrack   \neq  \left\lbrack  {ba}\right\rbrack\) , and \(\left\lbrack  {a{b}^{-1}{a}^{2}{b}^{2}{a}^{-2}b}\right\rbrack\) cannot be reduced further.
-\end{itemize}
-
-Since \(S\) is not an abelian group in such case, we imply \(F\left( S\right)  ≆ \mathbb{Z} \times  \mathbb{Z}\) .
-
-\section*{10.6.3. Relations on Free Groups}
-
-Definition 10.12 [Group With Relations] Let \(S\) be a set. A group with relations is written as
-
+\begin{definition} [Group With Relations] Let \(S\) be a set. A group with relations is written as
 \[
 G = \langle S \mid  R\left( S\right) \rangle
 \]
-
-where
-
+where \(R\left( S\right)\) consists of elements in \(F\left( S\right)\), and every element in \(G\) can be written as the form \(\left\lbrack  w\right\rbrack\) for some  \(w  \in  F\left( S\right)\). We insist that \(\left\lbrack  w\right\rbrack   = \left\lbrack  {w}^{\prime }\right\rbrack\) in \(G\) iff 
 \begin{itemize}
-\item \(R\left( S\right)\) consists of elements in \(F\left( S\right)\)
+\item \(w\) and \({w}^{\prime }\) differ by some \(x{x}^{-1},x \in  S \cup  {S}^{-1}\), or
+\item \(w\) and \({w}^{\prime }\) differ by some element \(z \in  R\left( S\right)\), or its inverse.
 \end{itemize}
+(One can easily check the above two conditions defines an equivalence relationship $\sim$ on $F(S)$, and hence $[w] \in G := F(S)/ \sim$ can be seen as the equivalence class with representative $w$. 
+\end{definition}
 
-\begin{itemize}
-\item Every element in \(G\) can be written as the form \(\left\lbrack  w\right\rbrack   \in  F\left( S\right)\) , and we insist that \(\left\lbrack  w\right\rbrack   = \left\lbrack  {w}^{\prime }\right\rbrack\) in \(G\) if
-\end{itemize}
-
-\begin{itemize}
-\item \(w\) and \({w}^{\prime }\) differ by some \(x{x}^{-1},x \in  S \cup  {S}^{-1}\) , or
-\end{itemize}
-
-\begin{itemize}
-\item \(w\) and \({w}^{\prime }\) differ by some element \(z \in  R\left( S\right)\) , or its inverse.
-\end{itemize}
-
-\begin{itemize}
-\item Example 10.9 Let \(G = \left\langle  {a,b \mid  {a}^{2},{b}^{2},{aba}{b}^{-1}{a}^{-1}{b}^{-1}}\right\rangle\) , we want to enumerate all possible elements in \(G\) . Obseve that
-\end{itemize}
-
+\begin{example} Let 
+\[G = \left\langle  {a,b \mid  {a}^{2},{b}^{2},{aba}{b}^{-1}{a}^{-1}{b}^{-1}}\right\rangle.\] 
+We want to enumerate all possible elements in \(G\). To do so, observe that
 \[
-\left\lbrack  {b}^{-1}\right\rbrack   = \left\lbrack  {{b}^{-1}{b}^{2}}\right\rbrack   = \left\lbrack  b\right\rbrack  ,\;\text{ similarly }\left\lbrack  {a}^{-1}\right\rbrack   = \left\lbrack  a\right\rbrack
-\]
-
-\[
+\left\lbrack  {b}^{-1}\right\rbrack   = \left\lbrack  {{b}^{-1}{b}^{2}}\right\rbrack   = \left\lbrack  b\right\rbrack ,\quad \left\lbrack  {a}^{-1}\right\rbrack   = \left\lbrack  a\right\rbrack,
+\quad
 \left\lbrack  {bab}\right\rbrack   = \left\lbrack  {{aba}{b}^{-1}{a}^{-1}{b}^{-1}{bab}}\right\rbrack   = \left\lbrack  {{aba}{b}^{-1}b}\right\rbrack   = \left\lbrack  {aba}\right\rbrack
 \]
-
 As a result,
-
 \begin{itemize}
 \item \(\left\lbrack  {a}^{-n}\right\rbrack   = \left\lbrack  {a}^{n}\right\rbrack\) and \(\left\lbrack  {b}^{-n}\right\rbrack   = \left\lbrack  {b}^{n}\right\rbrack\)
+\item \(\left\lbrack  {a}^{{2n} + 1}\right\rbrack   = \left\lbrack  a\right\rbrack ,\left\lbrack  {b}^{{2n} + 1}\right\rbrack   = \left\lbrack  b\right\rbrack ,\left\lbrack  {a}^{2n}\right\rbrack   = \left\lbrack  \varnothing \right\rbrack ,\left\lbrack  {b}^{2n}\right\rbrack   = \left\lbrack  \varnothing \right\rbrack\)
+\item All elements of \(G\) are of the form \(\left\lbrack  {\cdots {abababab}\cdots }\right\rbrack\).
 \end{itemize}
-
-\begin{itemize}
-\item \(\left\lbrack  {a}^{{2n} + 1}\right\rbrack   = \left\lbrack  a\right\rbrack  ,\left\lbrack  {b}^{{2n} + 1}\right\rbrack   = \left\lbrack  b\right\rbrack  ,\left\lbrack  {a}^{2n}\right\rbrack   = \left\lbrack  \varnothing \right\rbrack  ,\left\lbrack  {b}^{2n}\right\rbrack   = \left\lbrack  \varnothing \right\rbrack\)
-\end{itemize}
-
-\begin{itemize}
-\item For another type of element of \(G\) , it must be of the form \(\left\lbrack  {\cdot {abababab}\cdots }\right\rbrack\) .
-\end{itemize}
-
-Each aba can be changed into \({bab}\) , and finally it will be reduced into the form \(\left\lbrack  {ab}\right\rbrack\) . Therefore, the elements in \(G\) are
-
+Moreover, since each $aba$ can be changed into \({bab}\), the elements in \(G\) are
 \[
-\left\lbrack  \varnothing \right\rbrack  ,\left\lbrack  a\right\rbrack  ,\left\lbrack  b\right\rbrack  ,\left\lbrack  {ab}\right\rbrack  ,\left\lbrack  {ba}\right\rbrack  ,\left\lbrack  {aba}\right\rbrack
+\left\lbrack  \varnothing \right\rbrack ,\left\lbrack  a\right\rbrack ,\left\lbrack  b\right\rbrack ,\left\lbrack  {ab}\right\rbrack ,\left\lbrack  {ba}\right\rbrack ,\left\lbrack  {aba}\right\rbrack
 \]
-
-In fact, \(G \cong  {S}_{3}\) .
-
-\section*{11.3. Monday for MAT4002}
-
-Reviewing. Consider the group with presentation \(\langle S \mid  R\left( S\right) \rangle\) .
-
-1. The elements in \(S\) are generators that have studied in abstract algebra
-
-2. The "relations" of this group are given by the equalities on hte right-hand side, e.g., the dihedral group is defined as
-
-\[
-\left\langle  {a,b \mid  {a}^{n} = e,{b}^{2} = e,{bab} = {a}^{-1}}\right\rangle
-\]
-
-Sometimes we also simplify the equality \(\times   = e\) as \(\times\) , e.g., the dihedral group can be re-written as
-
-\[
-\left\langle  {a,b \mid  {a}^{n},{b}^{2},{bab} = {a}^{-1}}\right\rangle
-\]
-
-\section*{Example 11.4 Consider}
-
-\[
-G =  < a,b \mid  {a}^{2},{b}^{2},{aba}{b}^{-1}{a}^{-1}{b}^{-1} >  \mathrel{\text{ := }}  < a,b \mid  {a}^{2},{b}^{2},{aba} = {bab} >  = \{ e,a,b,{ab},{ba},{aba}\}
-\]
-
-It’s isomorphic to \({S}^{3}\) , and the shape of \({S}^{3}\) is illustrated in Fig.(11.1)
-
+In fact, \(G \cong D_6 (\cong {S}_{3})\), where $S_3 := \{ \mu: \{1,2,3\} \to \{1,2,3\}\ |\ \mu\ \text{is bijective}\}$ is the symmetric (or permutation) group of $3$ elements. There are $6 = 3!$ elements of $S_3$:
 \begin{center}
-\includegraphics[max width=0.4\textwidth]{images/bo_d2bcsrref24c73avs720_107_737_1365_483_327_0.jpg}
+\includegraphics[width=0.5\textwidth]{images/Ch6_symmetric_group.jpg}
 \end{center}
-\hspace*{3em} 
+for instance, $\times \mid$ is the bijection 
+\begin{center}
+$1 \mapsto 2$, $2 \mapsto 1$, $3 \mapsto 1$
+\end{center}
+and $\mid \times$ is the bijection
+\begin{center}
+$1 \mapsto 1$, $2 \mapsto 3$, $3 \mapsto 2$.
+\end{center}
+Then the isomorphism \(\phi  : {S}_{3} \rightarrow  G
+\) is given by:
+where $\phi(\times \mid) = a$, $\phi(\mid  \times) =  b$.
+\end{example}
 
-Figure 11.1: Illustration of group \({S}^{3}\)
-
-More precisely, the isomorphism is given by:
-
+\begin{example}
+\begin{enumerate}
+    \item The dihedral group $D_{2n}$ is isomorphic to (or one can simply take this as a definition):
 \[
-\phi  : \;{S}_{3} \rightarrow  G
+D_{2n} :=\left\langle  {a,b \mid  {a}^{n} = e,{b}^{2} = e,{bab} = {a}^{-1}}\right\rangle
 \]
+\item Consider \({G} =  < a,b \mid  {ab} = {ba} >\). Then any element of $G$ can be expressed as \([\cdots {a}^{s}{b}^{t}{a}^{u}{b}^{v}\cdots]\). Using the relations \({ab} = {ba}\) and $b{a}^{-1} = {a}^{-1}b$, we can always push all powers of \(a\) to the left.
 
+Therefore, all elements in \({G}\) are of the form \([{a}^{p}{b}^{q}],\ p,q \in  \mathbb{Z}\), and we have the relation
 \[
-\text{ with }X \mid   \mapsto  a,\; \mid  X \mapsto  b
+\left[ {{a}^{{p}_{1}}{b}^{{q}_{1}}}\right] \left[ {{a}^{{p}_{2}}{b}^{{q}_{2}}}\right] = [{a}^{{p}_{1} + {p}_{2}}{b}^{{q}_{1} + {q}_{2}}].
 \]
-
-\begin{itemize}
-\item Example 11.5 Consider \({G}_{2} =  < a,b \mid  {ab} = {ba} >\) and any word, which can be expressed as \(\cdots {a}^{s}{b}^{t}{a}^{u}{b}^{v}\cdots\)
-\end{itemize}
-
-\begin{itemize}
-\item If \(s \in  \mathbb{N}\) , we write \({a}^{s} \mathrel{\text{ := }} \underset{s\text{ times }}{\underbrace{a\cdots a}}\)
-\end{itemize}
-
-\begin{itemize}
-\item If \(s \in   - \mathbb{N}\) , we write \({a}^{s} \mathrel{\text{ := }} \underset{-s\text{ times }}{\underbrace{\left( {a}^{-1}\right) \cdots \left( {a}^{-1}\right) }}\)
-\end{itemize}
-
-\begin{itemize}
-\item For the word with the form \(a\cdots b\cdots {ba}\cdots a\) , we can always push \(a\) into the leftmost using the relation \({ab} = {ba}\)
-\end{itemize}
-
-\begin{itemize}
-\item For the word with the form \(a\cdots {ab}\cdots b{a}^{-1}\) , we can always push \({a}^{-1}\) into the leftmost using the relation \(b{a}^{-1} = {a}^{-1}b\) .
-\end{itemize}
-
-Therefore, all elements in \({G}_{2}\) are of the form \({a}^{p}{b}^{q},p,q \in  \mathbb{Z}\) , and we have the relation
-
-\[
-\left( {{a}^{{p}_{1}}{b}^{{q}_{1}}}\right) \left( {{a}^{{p}_{2}}{b}^{{q}_{2}}}\right)  = {a}^{{p}_{1} + {p}_{2}}{b}^{{q}_{1} + {q}_{2}}.
-\]
-
-Therefore, \({G}_{2} \cong  \mathbb{Z} \times  \mathbb{Z}\) , where the isomorphism is given by:
-
+Therefore, \({G} \cong  \mathbb{Z} \times  \mathbb{Z}\), where the isomorphism is given by:
 \[
 \phi  : \;\mathbb{Z} \times  \mathbb{Z} \rightarrow  {G}_{2}
 \]
+with \(\left( {p,q}\right)  \mapsto  [{a}^{p}{b}^{q}].\)
 
-\[
-\text{ with }\left( {p,q}\right)  \mapsto  {a}^{p}{b}^{q}
+\item Let \[
+H = \left\langle  {a \mid  {a}^{5}}\right\rangle   = \left\{  {1,a,{a}^{2},\ldots,{a}^{4}}\right\}
 \]
-
-\begin{itemize}
-\item Example 11.6
-\end{itemize}
-
+It’s clear that \(H \cong  \mathbb{Z}/5\mathbb{Z}\), where the isomorphism is given by:
 \[
-{G}_{3} = \left\langle  {a \mid  {a}^{5}}\right\rangle   = \left\{  {1,a,{a}^{2},\ldots ,{a}^{4}}\right\}
+\phi  : \;\mathbb{Z}/5\mathbb{Z} \rightarrow  H
 \]
+with \(m + 5\mathbb{Z} \mapsto  [{a}^{m}].\)
+\end{enumerate}
+\end{example}
 
-It’s clear that \({G}_{3} \cong  \mathbb{Z}/5\mathbb{Z}\) , where the isomorphism is given by:
-
-\[
-\phi  : \;\mathbb{Z}/5\mathbb{Z} \rightarrow  {G}_{3}
-\]
-
-\[
-\text{ with }m + 5\mathbb{Z} \mapsto  {a}^{m}
-\]
-
-\section*{11.3.1. Cayley Graph for finitely presented groups}
-
+\section{Cayley Graph for finitely presented groups}
 Graphs have strong connection with groups. Here we introduce a way of building graphs using groups, and the graphs are known as Cayley graphs. They describe many properties of the group in a topological way.
 
-Definition 11.5 [Oriented Graph] An oriented graph \(T\) is specified by
+\begin{definition} [Oriented Graph] An oriented graph \(T\) is specified by
 
-1. A countable or finite set \(V\) , known as vertices
+1. A countable or finite set \(V\), known as vertices
 
-2. A countable or finite set \(E\) , known as edges
+2. A countable or finite set \(E\), known as edges
 
 3. A function \(\delta  : E \rightarrow  V \times  V\) given by
-
 \[
-\delta \left( e\right)  = \left( {\ell \left( e\right) ,\tau \left( e\right) }\right)
+\delta \left( e\right)  = \left( {\ell \left( e\right),\tau \left( e\right) }\right)
 \]
-
 where \(\ell \left( e\right)\) denotes the initial vertex and \(\tau \left( e\right)\) denotes the terminal vertex.
+\end{definition}
 
 For example, let
-
 \begin{itemize}
 \item \(V = \{ a,b,c\}\)
-\end{itemize}
-
-\begin{itemize}
 \item \(E = \left\{  {{e}_{1},{e}_{2},{e}_{3},{e}_{4}}\right\}\)
+\item \(\delta \left( {e}_{1}\right)  = \left( {a,a}\right),\delta \left( {e}_{2}\right)  = \left( {b,c}\right),\delta \left( {e}_{3}\right)  = \left( {a,c}\right),\delta \left( {e}_{4}\right)  = \left( {b,c}\right)\)
 \end{itemize}
-
-\begin{itemize}
-\item \(\delta \left( {e}_{1}\right)  = \left( {a,a}\right) ,\delta \left( {e}_{2}\right)  = \left( {b,c}\right) ,\delta \left( {e}_{3}\right)  = \left( {a,c}\right) ,\delta \left( {e}_{4}\right)  = \left( {b,c}\right)\)
-\end{itemize}
-
+Then its oriented graph looks like:
 \begin{center}
-\includegraphics[max width=0.3\textwidth]{images/bo_d2bcsrref24c73avs720_109_740_1525_457_264_0.jpg}
+\includegraphics[width=0.3\textwidth]{images/Ch6_oriented_graph.jpg}
 \end{center}
-\hspace*{3em} 
 
-Figure 11.2: Illustration of example oriented graph
-
-The resulted graph is plotted in Fig.(11.2)
-
-Definition 11.6 [Cayley graph] Let \(G = \langle S \mid  R\left( S\right) \rangle\) with \(\left| S\right|  < \infty\) . The Cayley graph associated to \(G\) is an oriented graph with
+\begin{definition} [Cayley graph] Let \(G = \langle S \mid  R\left( S\right) \rangle\) with \(\left| S\right|  < \infty\). The Cayley graph associated to \(G\) is an oriented graph with
 
 1. The vertex set \(G\)
 
 2. The edge set \(E \mathrel{\text{ := }} G \times  S\)
 
 3. The function \(\ell  : E \rightarrow  V \times  V\) is given by:
+\[\ell  : \;G \times  S \rightarrow  G \times  G\]
+with \(\left( {g,s}\right)  \mapsto  \left( {g,g \cdot  s}\right)\). In particular, we link two elements in \(G\) if they differ by a generator multiplied on the right.
+\end{definition}
 
-\(\ell  : \;G \times  S \rightarrow  G \times  G\)
+\begin{example}
+\begin{enumerate}
+    \item The Cayley graph for \(G = \langle a\rangle \left( { \cong  \mathbb{Z}}\right)\) is shown below:
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/Ch6_graph_Z.jpg}
+\end{center}
 
-with \(\left( {g,s}\right)  \mapsto  \left( {g,g \cdot  s}\right)\)
 
-In particular, we link two elements in \(G\) if they differ by a generator rightside.
-
-1. The Cayley graph for \(G = \langle a\rangle \left( { \cong  \mathbb{Z}}\right)\) is shown in Fig.(11.3):
+\item The Cayley graph for \(G = \left\langle  {a \mid  {a}^{3}}\right\rangle\) is:
 
 \begin{center}
-\includegraphics[max width=0.6\textwidth]{images/bo_d2bcsrref24c73avs720_110_448_1055_769_250_0.jpg}
+\includegraphics[width=0.3\textwidth]{images/Ch6_graph_Z3.jpg}
 \end{center}
-\hspace*{3em} 
 
-Figure 11.3: Illustration of Cayley Graph \(\langle a\rangle\)
-
-2. The Cayley graph for \(G = \left\langle  {a \mid  {a}^{3}}\right\rangle\) is shown in Fig.(11.4):
+\item The Cayley graph for \(G = \left\langle  {a,b \mid  {a}^{2},{b}^{2},{aba} = {bab}}\right\rangle\) is:
 
 \begin{center}
-\includegraphics[max width=0.3\textwidth]{images/bo_d2bcsrref24c73avs720_110_618_1541_437_374_0.jpg}
+\includegraphics[width=0.35\textwidth]{images/Ch6_graph_S3.png}
 \end{center}
-\hspace*{3em} 
 
-Figure 11.4: Illustration of Cayley Graph \(\left\langle  {a \mid  {a}^{3}}\right\rangle\)
-
-3. The Cayley graph for \(G = \left\langle  {a,b \mid  {a}^{2},{b}^{2},{aba} = {bab}}\right\rangle\) is shown in Fig.(11.12):
+\item The Cayley graph for \(G = \langle a,b \mid  {ab} = {ba}\rangle\) is:
 
 \begin{center}
-\includegraphics[max width=0.2\textwidth]{images/bo_d2bcsrref24c73avs720_111_811_303_314_242_0.jpg}
+\includegraphics[width=0.4\textwidth]{images/Ch6_graph_ZZ.jpg}
 \end{center}
-\hspace*{3em} 
 
-Figure 11.5: Illustration of Cayley Graph \(\left\langle  {a,b \mid  {a}^{2},{b}^{2},{aba} = {bab}}\right\rangle\)
 
-4. The Cayley graph for \(G = \langle a,b \mid  {ab} = {ba}\rangle\) is shown in Fig.(11.6):
+\item The Cayley graph for \(G = \langle a,b\rangle\) is:
 
 \begin{center}
-\includegraphics[max width=0.2\textwidth]{images/bo_d2bcsrref24c73avs720_111_805_742_343_264_0.jpg}
+\includegraphics[width=0.5\textwidth]{images/Ch6_graph_F2.jpg}
 \end{center}
-\hspace*{3em} 
-
-Figure 11.6: Illustration of Cayley Graph \(\langle a,b \mid  {ab} = {ba}\rangle\)
-
-5. The Cayley graph for \(G = \langle a,b\rangle\) is shown in Fig.(11.7):
-
-\begin{center}
-\includegraphics[max width=0.2\textwidth]{images/bo_d2bcsrref24c73avs720_111_809_1204_329_290_0.jpg}
-\end{center}
-\hspace*{3em} 
-
-Figure 11.7: Illustration of Cayley Graph \(\langle a,b \mid  {ab} = {ba}\rangle\)
-
-There could be different presentations \(\left\langle  {{S}_{1} \mid  R\left( {S}_{1}\right) }\right\rangle   \cong  \left\langle  {{S}_{2} \mid  R\left( {S}_{2}\right) }\right\rangle\) of the same group.
+\end{enumerate}
+\end{example}

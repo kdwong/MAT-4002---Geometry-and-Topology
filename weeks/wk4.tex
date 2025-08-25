@@ -335,7 +335,7 @@ Therefore, \(\mathbb{R}/ \sim   \cong  {S}^{1}\), provided that \(x \sim  y\) if
 \end{example}
 
 \section{Simplicial Complex}
-The idea of simplicial complex is to build some new spaces from some "fundamental" objects. The combinatorialists often study topology by the combinatorics of these fundamental objects. First we define what are the "fundamental" objects:
+The idea of simplicial complex is to build some new spaces from some "fundamental" objects. The combinatorists often study topology by the combinatorics of these fundamental objects. First we define what are the "fundamental" objects:
 
 \begin{definition}[ \(n\) -simplex] \label{def:n_simplex} The standard \(n\) -simplex is the set
 \[
@@ -443,11 +443,11 @@ Step 2: "glue" these three prisms in the figure above together. Then it will giv
 \begin{example}
 The simplicial complex below is a topological realization of \({S}^{2}\):
 \begin{center}
-\includegraphics[width=0.4\textwidth]{images/Ch4_S1_triangle.jpg}
+\includegraphics[width=0.35\textwidth]{images/Ch4_S1_triangle.jpg}
 \end{center}
 Indeed, $S^2$ is homeomorphic to the quotient space of $[0,1] \times [0,1]$ with the following identification:
 \begin{center}
-\includegraphics[width=0.5\textwidth]{images/Ch4_S1_quotient.jpg}
+\includegraphics[width=0.35\textwidth]{images/Ch4_S1_quotient.jpg}
 \end{center}
 \end{example}
 
@@ -456,9 +456,9 @@ One may ask whether one we build a triangulation of the tours using fewer simpli
 
 For instance, one may think the number of triangles can be reduced as in the figure below: 
 \begin{center}
-\includegraphics[width=0.4\textwidth]{images/Ch4_turous_nonex.jpg}
+\includegraphics[width=0.3\textwidth]{images/Ch4_turous_nonex.jpg}
 \end{center}
-Howeverm if one pays attention to the bottom edge of the square, there are two 1-simplicies labelled \(\{ 1,2\}\), which means we have to 'glue the two bottom edges together, which cannot happen in the construction of torus.
+However, if one pays attention to the bottom edge of the square, there are two 1-simplicies labeled \(\{ 1,2\}\), which means we have to 'glue the two bottom edges together, which cannot happen in the construction of torus.
 
 As another example, the following diagram {\bf DOES NOT} give a triangulation of $S^2$:
 \begin{center}
@@ -522,10 +522,11 @@ and simplicies:
 \[
 \{ \sigma  \in  \Sigma  \mid  \mathbf{v} \notin  \sigma \text{ and }\sigma  \cup  \{ \mathbf{v}\}  \in  \Sigma \}
 \]
-\item The \emph{star} of \(v\) (denoted as \(\operatorname{st}\left( v\right)\) ) is
+\item The \emph{star} of \(v\) (denoted as \(\operatorname{st}\left( v\right)\)) is
 \[
-\bigcup \{ \operatorname{inside}\left( \sigma \right)  \mid  \sigma  \in  \Sigma,v \in  \sigma \}
+\bigcup_{\sigma  \in  \Sigma,\ v \in  \sigma} \operatorname{inside}\left( \sigma \right)
 \]
+(c.f. \autoref{def:n_simplex} for the definition of inside of an $n$-simplex)
 \end{itemize}
 \end{definition}
 
@@ -536,9 +537,7 @@ and simplicies:
 
 \begin{proposition} Suppose that \(K = \left( {V,\Sigma }\right)\), where \(V\) is finite. Then \(\left| K\right|\) is compact.
 \end{proposition}
-\begin{proof} The mapping \(p: D \rightarrow  \left| K\right|\) is a canonical projection mapping, which is continuous; and \(D\) (the finite disjoint union of \({\Delta }_{\sigma }\) ’s) is compact.
-
-Therefore, \(p\left( D\right)  = \left| K\right|\) is compact.
+\begin{proof} The mapping \(p: D \rightarrow  \left| K\right|\) is a canonical projection mapping, which is continuous; and \(D\) (the finite disjoint union of \({\Delta }_{\sigma }\) ’s) is compact. Therefore, \(p\left( D\right)  = \left| K\right|\) is compact.
 \end{proof}
 
 \begin{proposition} For any simplicial complex \(K = \left( {V,\Sigma }\right)\), where \(V\) is finite, there is a continuous injection
@@ -556,13 +555,13 @@ Consider the inclusion
 i: \left| K\right|  \rightarrow  \left| K^{\Pi}\right|
 \]
 which comes from the following:
+\begin{enumerate}
+    \item Consider the \(D \mathrel{\text{:= }} \mathop{\coprod }\limits_{{\sigma  \in  \Sigma }}{\Delta }_{\sigma }\) and \({D}^{\prime } = \mathop{\coprod }\limits_{{\Sigma^{\Pi} \in  \Sigma^{\Pi}}}{\Delta }_{\Sigma^{\Pi}}\) in \(\left( {V,\Sigma }\right)\) and \(\left( {V,\Sigma^{\Pi}}\right)\)
 
-1. Consider the \(D \mathrel{\text{:= }} \mathop{\coprod }\limits_{{\sigma  \in  \Sigma }}{\Delta }_{\sigma }\) and \({D}^{\prime } = \mathop{\coprod }\limits_{{\Sigma^{\Pi} \in  \Sigma^{\Pi}}}{\Delta }_{\Sigma^{\Pi}}\) in \(\left( {V,\Sigma }\right)\) and \(\left( {V,\Sigma^{\Pi}}\right)\)
+\item Construct the mapping \(\widetilde{i}: D \hookrightarrow  {D}^{\prime }\overset{{p}^{\prime }}{ \rightarrow  }\left| K\right|\).
 
-2. Construct the mapping \(\widetilde{i}: D \hookrightarrow  {D}^{\prime }\overset{{p}^{\prime }}{ \rightarrow  }\left| K\right|\).
-
-3. The mapping \(\widetilde{i}\) descends to \(i: D/ \sim   \rightarrow  \left| K^{\Pi}\right|\) (try to write down the detailed mapping), which is continuous and injective.
-
+\item The mapping \(\widetilde{i}\) descends to \(i: D/ \sim   \rightarrow  \left| K^{\Pi}\right|\) (try to write down the detailed mapping), which is continuous and injective.
+\end{enumerate}
 Therefore, \(\left| K\right|  \hookrightarrow  \left| K^{\Pi}\right|  (\hookrightarrow  {\mathbb{R}}^{n})\), and the proof is complete.
 \end{proof}
 
@@ -576,7 +575,7 @@ where $p$ denotes the canonical projection mapping. Then \(f\) descends to a con
 \[
 \widetilde{f}: {D}_{\Sigma }/{ \sim  }_{\Sigma } \rightarrow {D}_{\widetilde{\Sigma}}/{ \sim  }_{\widetilde{\Sigma}}
 \]
-Note that \(\widetilde{f}\) is injective since for all $x,y \in  {D}_{\Sigma }$:
+Note that \(\widetilde{f}\) is injective since for all $x,y \in  {D}_{\Sigma }$,
 \[
 x{ \sim  }_{\widetilde{\Sigma}}y \quad \Leftrightarrow  \quad i\left( x\right) { \sim  }_{\widetilde{\Sigma}}\ i\left( y\right),
 \]
@@ -594,11 +593,11 @@ Since \(\left| K\right|\) is compact, and \(g\left( \left| K\right| \right)  \su
 \begin{definition}[Edge Path] \label{def:edge_path} An edge path of \(K = \left( {V,\Sigma }\right)\) is a sequence of vertices \(\left( {{v}_{1},\ldots,{v}_{n}}\right),{v}_{i} \in  V\) such that \(\left\{  {{v}_{i},{v}_{i + 1}}\right\}   \in  \Sigma,\forall i\).
 \end{definition}
 
-\begin{proposition} Let \(K = \left( {V,\Sigma }\right)\) be a simplicial complex. TFAE:
+\begin{proposition} Let \(K = \left( {V,\Sigma }\right)\) be a simplicial complex. The following are equivalent:
 
-1. \(\left| K\right|\) is connected
+1. \(\left| K\right|\) is connected.
 
-2. \(\left| K\right|\) is path-connected
+2. \(\left| K\right|\) is path-connected.
 
 3. Any 2 vertices in \(\left( {V,\Sigma }\right)\) can be joined by an edge path, i.e., for \(\forall u,v \in  V\), there exists \({v}_{1},\ldots,{v}_{k} \in  V\) such that \(\left( {u,{v}_{1},\ldots,{v}_{k},v}\right)\) is an edge path.
 \end{proposition}
